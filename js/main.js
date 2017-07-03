@@ -1,31 +1,42 @@
 window.onload = function (e) {
+	var ary = [];
+	$.getJSON("datas/data.json", function (data) {
+		for (var i in data) {
+			ary.push(i);
+		}
+		setSlider(ary);
 
-	var sliderAry = getDataArray(); //Load Json的資料
-	setTimeout(function () { //要延遲不然會有非同步問題
-		setSlider();
-	}, 100);
+	});
 
 
 
 
-	function getDataArray() {
-		var ary = [];
-		//$.ajaxSetup({ async: false }); 改為同步
-		$.getJSON("datas/data.json", function (data) {
-			for (var i in data) {
-				ary.push(i);
-			}
-		});
-		return ary;
-	}
 
-	function setSlider() {
+
+
+
+
+
+	function setSlider(sliderAry) {
 		$("#dateSlider").ionRangeSlider({
 			type: "single", //double,single
 			values: sliderAry,
 			onFinish: function (data) {
-				//alert(data)
+				resetData(data);
 			}
 		});
+	}
+
+	function resetData(d) {
+		var yearMon = d["from_value"];
+		$("#data_type")[0].innerHTML = "民國 " + yearMon + " 臺灣各縣市人口數量";
+		setfeatures(yearMon);
+		setColor();
+
+
+
+
+
+
 	}
 }
