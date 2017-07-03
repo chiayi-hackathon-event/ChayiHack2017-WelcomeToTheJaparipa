@@ -1,0 +1,54 @@
+path {
+    cursor: pointer;
+}
+button {
+    background-color: #4CAF50;
+    border: 2px solid #4CAF50;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+button:hover
+{
+  border: 2px solid #fff83f;
+  color: #fff83f;
+}
+button:active
+{
+
+  border: 2px solid #fff83f;
+  color: #fff83f;
+  font-size: 16px;
+
+}
+#info
+{
+    position: absolute;
+    top: 80px;
+    left: 10%;
+    text-align: center;
+    font-size: 60%;
+    background-color: #333;
+    border-radius: 3px;
+    padding: 2px 7px;
+    color: #fff;
+    display: none;
+}
+#data_type
+{
+     font-size: 2em;
+     font-family:Microsoft JhengHei ;
+}
+#name {
+    font-size: 3em;
+    font-family:Microsoft JhengHei ;
+}
+#case {
+    font-size: 3em;
+    font-family:Microsoft JhengHei ;
+}
