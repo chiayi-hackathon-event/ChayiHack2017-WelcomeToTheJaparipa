@@ -1,4 +1,6 @@
-var _oData = [];
+var _oData;
+var _nData;
+var _cDataIndex; //選到的資料
 var _features;
 var _taiwan;
 
@@ -22,18 +24,18 @@ function setDatas(yearMon) {
 		if (!yearMon)
 			yearMon = "86年 1月";
 
-		var firstData = _oData[yearMon];
+		_nData = _oData[yearMon];
 		for (i = 0; i < _features.length; i++) {
 			_features[i]["properties"]["人口數(人)"] = [];
 			_features[i]["properties"]["總增加率"] = [];
 			_features[i]["properties"]["自然增加率"] = [];
 			_features[i]["properties"]["社會增加率"] = [];
-			for (j = 1; j < firstData.length; j++) {
-				if (normlizion_city_name(_features[i]["properties"]["C_Name"]) == normlizion_city_name(firstData[j]["地區"])) {
-					_features[i]["properties"]["人口數(人)"] = firstData[j]["人口數(人)"];
-					_features[i]["properties"]["總增加率"] = firstData[j]["總增加率"];
-					_features[i]["properties"]["自然增加率"] = firstData[j]["自然增加率"];
-					_features[i]["properties"]["社會增加率"] = firstData[j]["社會增加率"];
+			for (j = 1; j < _nData.length; j++) {
+				if (normlizion_city_name(_features[i]["properties"]["C_Name"]) == normlizion_city_name(_nData[j]["地區"])) {
+					_features[i]["properties"]["人口數(人)"] = _nData[j]["人口數(人)"];
+					_features[i]["properties"]["總增加率"] = _nData[j]["總增加率"];
+					_features[i]["properties"]["自然增加率"] = _nData[j]["自然增加率"];
+					_features[i]["properties"]["社會增加率"] = _nData[j]["社會增加率"];
 
 				}
 			}
@@ -74,15 +76,16 @@ function setDatas(yearMon) {
 
 				//$("#info").hide();
 			}).on("click", function (d) {
-				var msg = "";
-				$("#info").show();
-				$("#name").text(d.properties.C_Name);
-				msg += "總共：" + eval(d["properties"]["人口數(人)"]) + "人<br/>";
-				msg += "總增加率：" + eval(d["properties"]["總增加率"]) + "%<br/>";
-				msg += "自然增加率：" + eval(d["properties"]["自然增加率"]) + "%<br/>";
-				msg += "社會增加率：" + eval(d["properties"]["社會增加率"]) + "%<br/>";
+				updateMsg(d)
+				// var msg = "";
+				// $("#info").show();
+				// $("#name").text(d.properties.C_Name);
+				// msg += "總共：" + eval(d["properties"]["人口數(人)"]) + "人<br/>";
+				// msg += "總增加率：" + eval(d["properties"]["總增加率"]) + "%<br/>";
+				// msg += "自然增加率：" + eval(d["properties"]["自然增加率"]) + "%<br/>";
+				// msg += "社會增加率：" + eval(d["properties"]["社會增加率"]) + "%<br/>";
 
-				$("#case").html(msg);
+				// $("#case").html(msg);
 
 			});
 		}
@@ -91,17 +94,25 @@ function setDatas(yearMon) {
 
 }
 
+function updateMsg(d) {
+
+
+
+	var msg = "";
+	$("#info").show();
+	$("#name").text(d.properties.C_Name);
+	msg += "總共：" + eval(d["properties"]["人口數(人)"]) + "人<br/>";
+	msg += "總增加率：" + eval(d["properties"]["總增加率"]) + "%<br/>";
+	msg += "自然增加率：" + eval(d["properties"]["自然增加率"]) + "%<br/>";
+	msg += "社會增加率：" + eval(d["properties"]["社會增加率"]) + "%<br/>";
+	_cDataIndex = d["properties"]["OBJECTID"] - 1;
+	$("#case").html(msg);
+}
+
 $(document).ready(function () {
-	// var accident_data = $.getJSON("final.json");
-
-
 	$.getJSON("datas/data.json", function (data) { //載入資料
 		_oData = data; //容量太大會有時間差的問題
 		setDatas();
-		//var firstData = data["86年 1月"];
-
-
-
 	});
 });
 
