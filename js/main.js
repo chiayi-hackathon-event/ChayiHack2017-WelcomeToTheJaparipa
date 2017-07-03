@@ -9,14 +9,6 @@ window.onload = function (e) {
 	});
 
 
-
-
-
-
-
-
-
-
 	function setSlider(sliderAry) {
 		$("#dateSlider").ionRangeSlider({
 			type: "single", //double,single
@@ -30,12 +22,8 @@ window.onload = function (e) {
 	function resetData(d) {
 		var yearMon = d["from_value"];
 		$("#data_type")[0].innerHTML = "民國 " + yearMon + " 臺灣各縣市人口數量";
-		setfeatures(yearMon);
-		setColor();
-
-
-
-
+		_taiwan.exit().remove()
+		setDatas(yearMon);
 
 
 	}
