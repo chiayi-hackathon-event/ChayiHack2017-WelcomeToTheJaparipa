@@ -58,8 +58,6 @@ function iconEleMouseoverEvent(e) {
 		var ih = e.target.offsetHeight;
 		var sh = selected.offsetHeight;
 		var h = (ih-sh)/2;
-
-
 		
 		a.innerHTML = e.target.title;
 		selected.style.top = e.target.offsetTop + h + "px";
