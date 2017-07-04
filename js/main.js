@@ -56,15 +56,10 @@ function SocialIncreaseClick() {
 }
 
 function resetColorBar(){
-	
-
-
+	var colorRag = _model[_statsIndex]["colorRag"];
 
 	var line = document.getElementsByTagName("stop");
-	line[0].setAttribute("",)
-
-
-
-
+	line[0].setAttribute("stop-color",colorRag[0]);
+	line[1].setAttribute("stop-color",colorRag[1]);
 
 }

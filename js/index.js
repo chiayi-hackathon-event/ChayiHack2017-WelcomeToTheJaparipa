@@ -9,22 +9,22 @@ var _model = [
 	{
 		"id": "人口數(人)",
 		"colorRag": ["#00FF00", "#FF0000"],
-		"range":[0, 10000]
+		"range": [0, 10000]
 	},
 	{
 		"id": "總增加率",
 		"colorRag": ["#B9EDF8", "#0000A1"],
-		"range":[0, 600]
+		"range": [0, 600]
 	},
 	{
 		"id": "自然增加率",
 		"colorRag": ["#F40076", "#35CE8D"],
-		"range":[0, 20]
+		"range": [0, 20]
 	},
 	{
 		"id": "社會增加率",
 		"colorRag": ["#00303F", "#FF5A09"],
-		"range":[0, 20]
+		"range": [0, 20]
 	}
 ]
 
@@ -73,7 +73,7 @@ function setDatas(yearMon) {
 }
 
 function setTaiwan() {
-	
+
 	var colorRag = _model[_statsIndex]["colorRag"];
 	var range = _model[_statsIndex]["range"];
 
@@ -128,7 +128,7 @@ function setTaiwan() {
 			updateMsg(d);
 		});
 	}
-	  update();
+	update();
 }
 
 function updateMsg(d) {
@@ -138,12 +138,20 @@ function updateMsg(d) {
 
 	$("#info").show();
 	$("#name").text(d.properties.C_Name);
-	msg += "總共：" + eval(d["properties"]["人口數(人)"]) + "人<br/>";
-	msg += "總增加率：" + eval(d["properties"]["總增加率"]) + "%<br/>";
-	msg += "自然增加率：" + eval(d["properties"]["自然增加率"]) + "%<br/>";
-	msg += "社會增加率：" + eval(d["properties"]["社會增加率"]) + "%<br/>";
+
+	msg += "總共：" + checkValue(eval(d["properties"]["人口數(人)"]) + "人<br/>");
+	msg += "總增加率：" + checkValue(eval(d["properties"]["總增加率"]) + "%<br/>");
+	msg += "自然增加率：" + checkValue(eval(d["properties"]["自然增加率"]) + "%<br/>");
+	msg += "社會增加率：" + checkValue(eval(d["properties"]["社會增加率"]) + "%<br/>");
 	_cDataIndex = d["properties"]["OBJECTID"] - 1;
 	$("#case").html(msg);
+}
+
+function checkValue(v) {
+	if (v.includes("undefined"))
+		return " 資料有誤 <br/>";
+	else
+		return v;
 }
 
 function normlizion_city_name(city_name) {
