@@ -27,39 +27,46 @@ window.onload = function (e) {
 		});
 	}
 
-
-
 }
 
-function PopulationClick() {
+function PopulationClick(e) {
 	_statsIndex = 0;
 	setTaiwan();
 	resetColorBar();
+	$("i").removeClass("selectedClass");
+	$(e).addClass("selectedClass");
+
 }
 
-function TotalIncreaseClick() {
+function TotalIncreaseClick(e) {
 	_statsIndex = 1;
 	setTaiwan();
 	resetColorBar();
+	$("i").removeClass("selectedClass");
+	$(e).addClass("selectedClass");
 }
 
-function NaturalIncreaseClick() {
+function NaturalIncreaseClick(e) {
 	_statsIndex = 2;
 	setTaiwan();
 	resetColorBar();
+	$("i").removeClass("selectedClass");
+	$(e).addClass("selectedClass");
 }
 
-function SocialIncreaseClick() {
+function SocialIncreaseClick(e) {
 	_statsIndex = 3;
 	setTaiwan();
 	resetColorBar();
+	$("i").removeClass("selectedClass");
+	$(e).addClass("selectedClass");
 }
 
-function resetColorBar(){
+function resetColorBar() {
 	var colorRag = _model[_statsIndex]["colorRag"];
 
 	var line = document.getElementsByTagName("stop");
-	line[0].setAttribute("stop-color",colorRag[0]);
-	line[1].setAttribute("stop-color",colorRag[1]);
+	line[0].setAttribute("stop-color", colorRag[0]);
+	line[1].setAttribute("stop-color", colorRag[1]);
 
 }

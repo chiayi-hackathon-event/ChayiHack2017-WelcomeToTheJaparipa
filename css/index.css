@@ -1,12 +1,30 @@
-path {
-    cursor: pointer;
+body{
+    background-image: url(https://d13yacurqjgara.cloudfront.net/users/244516/screenshots/2766513/the-hound_big_2_.gif);
+    background-size: 100% 100%;
 }
 
-.buttonEle {
+.iconsEle {
     position: absolute;
     display: grid;
-    right: 0px;
-    top: 30%;
+    right: 10px;
+    top: 25%;
+    background-color: rgba(70,70,70,0.34);
+}
+
+.icon{
+    cursor: pointer;
+    font-size: 60px;
+    padding:10px;
+}
+
+.icon:hover{
+    color:#e0e0e0;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.icon:active, .selectedClass {
+    color:#e0e0e0;
+    background:#9D0300;
 }
 
 button {

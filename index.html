@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>人口變動</title>
     <!-- libraries-->
-
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://d3js.org/d3.v3.min.js"></script>
     <script type="text/javascript" src="https://d3js.org/topojson.v1.min.js"></script>
@@ -16,6 +15,8 @@
     <link rel="stylesheet" type="text/css" href="css/ion.rangeSlider.css">
     <link rel="stylesheet" type="text/css" href="css/normalize.css">
     <link rel="stylesheet" type="text/css" href="css/ion.rangeSlider.skinHTML5.css">
+    <!-- css icon -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- custom files-->
     <link rel="stylesheet" type="text/css" href="css/index.css?v=<?=time();?">
     <script type="text/javascript" src="js/index.js"></script>
@@ -24,15 +25,15 @@
 
 <body>
     <div id="data_type">民國 86年 1月 臺灣各縣市人口數量</div>
-    <div class="buttonEle">
-        <button onclick="PopulationClick()">人口數(人)</button>
-        <button onclick="TotalIncreaseClick()">總增加率</button>
-        <button onclick="NaturalIncreaseClick()">自然增加率</button>
-        <button onclick="SocialIncreaseClick()">社會增加率</button>
+    <div class="iconsEle">
+        <i class="material-icons icon" title="人口數(人)" onclick="PopulationClick(this)">person</i>
+        <i class="material-icons icon" title="總增加率" onclick="TotalIncreaseClick(this)">group_add</i>
+        <i class="material-icons icon" title="自然增加率" onclick="NaturalIncreaseClick(this)">nature_people</i>
+        <i class="material-icons icon" title="社會增加率" onclick="SocialIncreaseClick(this)">group</i>
     </div>
 
     <div width='100%'>
-        <svg width="100%" height="80%" viewBox="0 0 900 350" preserveAspectRatio="xMidYMid">
+        <svg width="100%" height="80%" viewBox="0 40 900 350" preserveAspectRatio="xMidYMid">
             <defs>
 
             </defs>

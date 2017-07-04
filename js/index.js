@@ -79,7 +79,7 @@ function setTaiwan() {
 
 
 	var prj = function (v) {
-		var ret = d3.geo.mercator().center([122, 23.25]).scale(4000)(v);
+		var ret = d3.geo.mercator().center([122, 23.25]).scale(5200)(v);
 		return [ret[0], ret[1]];
 	};
 	var path = d3.geo.path().projection(prj);
@@ -125,6 +125,8 @@ function setTaiwan() {
 
 			//$("#info").hide();
 		}).on("click", function (d) {
+
+			$(this).attr('fill', 'gray');
 			updateMsg(d);
 		});
 	}
