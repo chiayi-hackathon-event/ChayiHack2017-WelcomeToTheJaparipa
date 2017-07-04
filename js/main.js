@@ -42,13 +42,16 @@ window.onload = function (e) {
 
 function iconEleMouseoverEvent(e) {
 	var t = e.type;
+	var text = e.target.title;
+	if (!text)
+		return;
 	var aEle = document.getElementsByClassName("hintHover")[0];
 	if (t == "mousemove") {
 		var a = document.getElementsByClassName("hintText")[0]; //設定文字
 		aEle.style.opacity = 1; //顯示出來
 		var h = aEle.offsetHeight;
 		aEle.style.top = e.layerY - h / 2 + "px"; //置中 
-		a.innerHTML = e.target.title;
+		a.innerHTML = text;
 
 
 
@@ -57,9 +60,9 @@ function iconEleMouseoverEvent(e) {
 		var a = document.getElementsByClassName("selectedText")[0]; //設定文字
 		var ih = e.target.offsetHeight;
 		var sh = selected.offsetHeight;
-		var h = (ih-sh)/2;
-		
-		a.innerHTML = e.target.title;
+		var h = (ih - sh) / 2;
+
+		a.innerHTML = text;
 		selected.style.top = e.target.offsetTop + h + "px";
 
 	}
