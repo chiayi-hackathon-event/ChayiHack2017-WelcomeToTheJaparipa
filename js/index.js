@@ -69,7 +69,6 @@ function setDatas(yearMon) {
 			}
 		}
 	}
-
 	setTaiwan();
 }
 
@@ -101,11 +100,11 @@ function setTaiwan() {
 		if (_statsIndex == 0)
 			return color(parseInt(eval(d["properties"][key])) / 300);
 		else if (_statsIndex == 1)
-			return color(parseInt(eval(d["properties"][key]) + 3.00) * 100);
+			return color(parseFloat(eval(d["properties"][key]) + 3.00) * 100);
 		else if (_statsIndex == 2)
-			return color(parseInt(eval(d["properties"][key]) + 1) * 10);
+			return color(parseFloat(eval(d["properties"][key]) + 1) * 10);
 		else //_statsIndex ==3
-			return color(parseInt(eval(d["properties"][key]) + 1) * 10);
+			return color(parseFloat(eval(d["properties"][key]) + 1) * 10);
 	}
 
 
@@ -129,7 +128,7 @@ function setTaiwan() {
 			updateMsg(d);
 		});
 	}
-	update();
+	  update();
 }
 
 function updateMsg(d) {

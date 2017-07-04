@@ -1,6 +1,14 @@
 path {
     cursor: pointer;
 }
+
+.buttonEle {
+    position: absolute;
+    display: grid;
+    right: 0px;
+    top: 30%;
+}
+
 button {
     background-color: #4CAF50;
     border: 2px solid #4CAF50;

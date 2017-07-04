@@ -34,20 +34,37 @@ window.onload = function (e) {
 function PopulationClick() {
 	_statsIndex = 0;
 	setTaiwan();
-
+	resetColorBar();
 }
 
 function TotalIncreaseClick() {
 	_statsIndex = 1;
 	setTaiwan();
+	resetColorBar();
 }
 
 function NaturalIncreaseClick() {
 	_statsIndex = 2;
 	setTaiwan();
+	resetColorBar();
 }
 
 function SocialIncreaseClick() {
 	_statsIndex = 3;
 	setTaiwan();
+	resetColorBar();
+}
+
+function resetColorBar(){
+	
+
+
+
+	var line = document.getElementsByTagName("stop");
+	line[0].setAttribute("",)
+
+
+
+
+
 }
