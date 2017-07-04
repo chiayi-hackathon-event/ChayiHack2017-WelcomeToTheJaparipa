@@ -1,4 +1,15 @@
 window.onload = function (e) {
+
+
+	var iconEle = document.getElementsByClassName("iconsEle")[0];
+	iconEle.addEventListener("mousemove", iconEleMouseoverEvent, true);
+	iconEle.addEventListener("mouseout", iconEleMouseoverEvent, true);
+	iconEle.addEventListener("click", iconEleMouseoverEvent, true);
+
+
+
+
+
 	var ary = [];
 	$.getJSON("datas/data.json", function (data) {
 		for (var i in data) {
@@ -29,12 +40,44 @@ window.onload = function (e) {
 
 }
 
+function iconEleMouseoverEvent(e) {
+	var t = e.type;
+	var aEle = document.getElementsByClassName("hintHover")[0];
+	if (t == "mousemove") {
+		var a = document.getElementsByClassName("hintText")[0]; //設定文字
+		a.innerHTML = e.target.title;
+		aEle.style.opacity = 1; //顯示出來
+		var h = aEle.offsetHeight;
+		aEle.style.top = e.layerY - h / 2 + "px"; //置中
+
+
+
+	} else if (t == "click") {
+		var selected = document.getElementsByClassName("hintSelected")[0];
+		var a = document.getElementsByClassName("selectedText")[0]; //設定文字
+		var ih = e.target.offsetHeight;
+		var sh = selected.offsetHeight;
+		var h = (ih-sh)/2;
+
+
+		
+		a.innerHTML = e.target.title;
+		selected.style.top = e.target.offsetTop + h + "px";
+
+	}
+	else if (t == "mouseout") {
+		aEle.style.opacity = 0; //隱藏起來
+
+
+	}
+}
+
 function PopulationClick(e) {
 	_statsIndex = 0;
 	setTaiwan();
 	resetColorBar();
-	$("i").removeClass("selectedClass");
-	$(e).addClass("selectedClass");
+	// $("i").removeClass("selectedClass");
+	// $(e).addClass("selectedClass");
 
 }
 
@@ -42,24 +85,21 @@ function TotalIncreaseClick(e) {
 	_statsIndex = 1;
 	setTaiwan();
 	resetColorBar();
-	$("i").removeClass("selectedClass");
-	$(e).addClass("selectedClass");
+
 }
 
 function NaturalIncreaseClick(e) {
 	_statsIndex = 2;
 	setTaiwan();
 	resetColorBar();
-	$("i").removeClass("selectedClass");
-	$(e).addClass("selectedClass");
+
 }
 
 function SocialIncreaseClick(e) {
 	_statsIndex = 3;
 	setTaiwan();
 	resetColorBar();
-	$("i").removeClass("selectedClass");
-	$(e).addClass("selectedClass");
+
 }
 
 function resetColorBar() {

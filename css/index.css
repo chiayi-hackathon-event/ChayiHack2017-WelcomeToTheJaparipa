@@ -1,5 +1,5 @@
 body{
-    background-image: url(https://d13yacurqjgara.cloudfront.net/users/244516/screenshots/2766513/the-hound_big_2_.gif);
+    background-image: url(../img/bg.gif);
     background-size: 100% 100%;
 }
 
@@ -22,9 +22,35 @@ body{
     background-color: rgba(0,0,0,0.5);
 }
 
-.icon:active, .selectedClass {
+.icon:active {
     color:#e0e0e0;
     background:#9D0300;
+}
+
+.hintHover{
+    position: absolute;
+    transition:.3s opacity 0s;
+    right: 100px;
+    width: 100%;
+    background:rgba(0,0,0,0.5);
+    color:white;
+    padding:15px;
+    opacity: 0;
+    font-size: 16px;
+    white-space: pre;
+}
+
+.hintSelected{
+    position: absolute;
+    transition:.3s opacity 0s;
+    right: 100px;
+    width: 100%;
+    color:#e0e0e0;
+    background:#9D0300;
+    padding:15px;
+    opacity: 1;
+    font-size: 16px;
+    white-space: pre;
 }
 
 button {
