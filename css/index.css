@@ -2,72 +2,73 @@ body {
     /*background-image: url(../img/bg2.gif);
     background-size: 100% 100%;*/
     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#a7cfdf+0,23538a+100;Blue+3d+%238 */
-/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f1e767+0,feb645+100;Yellow+3D */
-/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#feffe8+0,d6dbbf+100;Wax+3D+%231 */
-background: #feffe8; /* Old browsers */
-background: -moz-radial-gradient(center, ellipse cover, #feffe8 0%, #d6dbbf 100%); /* FF3.6-15 */
-background: -webkit-radial-gradient(center, ellipse cover, #feffe8 0%,#d6dbbf 100%); /* Chrome10-25,Safari5.1-6 */
-background: radial-gradient(ellipse at center, #feffe8 0%,#d6dbbf 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffe8', endColorstr='#d6dbbf',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-
-
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f1e767+0,feb645+100;Yellow+3D */
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#feffe8+0,d6dbbf+100;Wax+3D+%231 */
+    
+    background: #feffe8;
+    /* Old browsers */
+    
+    background: -moz-radial-gradient(center, ellipse cover, #feffe8 0%, #d6dbbf 100%);
+    /* FF3.6-15 */
+    
+    background: -webkit-radial-gradient(center, ellipse cover, #feffe8 0%, #d6dbbf 100%);
+    /* Chrome10-25,Safari5.1-6 */
+    
+    background: radial-gradient(ellipse at center, #feffe8 0%, #d6dbbf 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#feffe8', endColorstr='#d6dbbf', GradientType=1);
+    /* IE6-9 fallback on horizontal gradient */
 }
-
 .iconsEle {
     position: absolute;
     display: grid;
     right: 10px;
     top: 25%;
-    background-color: rgba(70,70,70,0.34);
+    background-color: rgba(70, 70, 70, 0.34);
 }
-
-.icon{
+.icon {
     cursor: pointer;
     font-size: 60px;
-    padding:10px;
+    padding: 10px;
 }
-
-.icon:hover{
-    color:#e0e0e0;
-    background-color: rgba(0,0,0,0.5);
+.icon:hover {
+    color: #e0e0e0;
+    background-color: rgba(0, 0, 0, 0.5);
 }
-
 .icon:active {
-    color:#e0e0e0;
-    background:#9D0300;
+    color: #e0e0e0;
+    background: #9D0300;
 }
-
-.hintHover{
+.hintHover {
     position: absolute;
     transition: .7s opacity;
     right: 100px;
     width: 100%;
-    background:rgba(0,0,0,0.5);
-    border:rgba(0,0,0,0.5);
-    color:white;
-    padding:15px;
+    background: rgba(0, 0, 0, 0.5);
+    border: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 15px;
     opacity: 0;
     font-size: 16px;
     white-space: pre;
 }
-
-.hintSelected{
+.hintSelected {
     position: absolute;
-    transition-property:top;
-    transition :.5s;
+    transition-property: top;
+    transition: .5s;
     right: 100px;
     width: 100%;
-    color:#e0e0e0;
-    background:#9D0300;
-    border:#9D0300;
-    padding:15px;
+    color: #e0e0e0;
+    background: #9D0300;
+    border: #9D0300;
+    padding: 15px;
     opacity: 1;
     font-size: 16px;
     white-space: pre;
-    top:20px;
+    top: 20px;
 }
-
-.triangle{
+.triangle {
     left: inherit;
     top: 10px;
     right: -1.2em;
@@ -81,7 +82,28 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffe8', end
     border-top-color: transparent;
     border-width: 15px 0px 15px 19px;
 }
-
+.leftButton {
+    position: absolute;
+    top: 70%;
+    left: 5%;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 50px 86.6px 50px 0;
+    border-color: transparent #74d0ea transparent transparent;
+    cursor: pointer;
+}
+.rightButton {
+    position: absolute;
+    top: 70%;
+    right: 30%;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 50px 0 50px 86.6px;
+    border-color: transparent transparent transparent #74d0ea;
+    cursor: pointer;
+}
 button {
     background-color: #4CAF50;
     border: 2px solid #4CAF50;
@@ -94,24 +116,19 @@ button {
     margin: 4px 2px;
     cursor: pointer;
 }
-button:hover
-{
-  border: 2px solid #fff83f;
-  color: #fff83f;
+button:hover {
+    border: 2px solid #fff83f;
+    color: #fff83f;
 }
-button:active
-{
-
-  border: 2px solid #fff83f;
-  color: #fff83f;
-  font-size: 16px;
-
+button:active {
+    border: 2px solid #fff83f;
+    color: #fff83f;
+    font-size: 16px;
 }
-#info
-{
+#info {
     position: absolute;
     top: 50%;
-    left:0;
+    left: 0;
     text-align: center;
     font-size: 60%;
     background-color: #333;
@@ -120,27 +137,23 @@ button:active
     color: #fff;
     display: none;
 }
-#data_type
-{
-     font-size: 2em;
-     font-family:Microsoft JhengHei ;
+#data_type {
+    font-size: 2em;
+    font-family: Microsoft JhengHei;
 }
 #name {
     font-size: 3em;
-    font-family:Microsoft JhengHei ;
+    font-family: Microsoft JhengHei;
 }
 #case {
     font-size: 3em;
-    font-family:Microsoft JhengHei ;
+    font-family: Microsoft JhengHei;
 }
-
-.sliderEle{
-    width :75%;
-    float: left;
-
-}
-.colorBarEle{
-width :25%;
+.sliderEle {
+    width: 75%;
     float: left;
 }
-
+.colorBarEle {
+    width: 25%;
+    float: left;
+}

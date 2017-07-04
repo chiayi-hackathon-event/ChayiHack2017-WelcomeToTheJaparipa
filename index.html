@@ -26,14 +26,19 @@
 <body>
     <div id="data_type">民國 86年 1月 臺灣各縣市人口數量</div>
     <div class="iconsEle">
-        <div class="hintHover"><a class="hintText"></a><div class="triangle"></div></div>
-        <div class="hintSelected"><a class="selectedText">人口數(人)</a><div class="triangle"></div></div>
-        <i class="material-icons icon" title="人口數(人)" onclick="PopulationClick(this)">person</i>
-        <i class="material-icons icon" title="總增加率" onclick="TotalIncreaseClick(this)">group_add</i>
-        <i class="material-icons icon" title="自然增加率" onclick="NaturalIncreaseClick(this)">nature_people</i>
-        <i class="material-icons icon" title="社會增加率" onclick="SocialIncreaseClick(this)">group</i>
+        <div class="hintHover"><a class="hintText"></a>
+            <div class="triangle"></div>
+        </div>
+        <div class="hintSelected"><a class="selectedText">人口數(人)</a>
+            <div class="triangle"></div>
+        </div>
+        <i class="material-icons icon" title="人口數(人)" onclick="setDataByIndex(this)" value="0">person</i>
+        <i class="material-icons icon" title="總增加率" onclick="setDataByIndex(this)" value="1">group_add</i>
+        <i class="material-icons icon" title="自然增加率" onclick="setDataByIndex(this)" value="2">child_care</i>
+        <i class="material-icons icon" title="社會增加率" onclick="setDataByIndex(this)" value="3">business_center</i>
     </div>
-
+    <div class="leftButton" value="less" onclick="contolSliderEvent(this)"> </div>
+    <div class="rightButton" value="add" onclick="contolSliderEvent(this)"> </div>
     <div width='100%'>
         <svg width="100%" height="80%" viewBox="0 40 900 350" preserveAspectRatio="xMidYMid">
             <defs>

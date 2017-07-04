@@ -24,18 +24,24 @@ window.onload = function (e) {
 		$("#dateSlider").ionRangeSlider({
 			type: "single", //double,single
 			values: sliderAry,
+			grid: true,
 			onFinish: function (data) {
-				var yearMon = data["from_value"];
-				$("#data_type")[0].innerHTML = "民國 " + yearMon + " 臺灣各縣市人口數量";
-				_taiwan.exit().remove();
-				setDatas(yearMon);
-				setTimeout(function () {
-					updateMsg(_features[_cDataIndex]);
-				}, 100);
-
-
+				sliderEvent(data);
+			},
+			onUpdate: function (data) {
+				sliderEvent(data);
 			}
 		});
+	}
+
+	function sliderEvent(data) {
+		var yearMon = data["from_value"];
+		$("#data_type")[0].innerHTML = "民國 " + yearMon + " 臺灣各縣市人口數量";
+		_taiwan.exit().remove();
+		setDatas(yearMon);
+		setTimeout(function () {
+			updateMsg(_features[_cDataIndex]);
+		}, 100);
 	}
 
 }
@@ -43,7 +49,7 @@ window.onload = function (e) {
 function iconEleMouseoverEvent(e) {
 	var t = e.type;
 	var text = e.target.title;
-	if (!text)
+	if (!text) //防呆
 		return;
 	var aEle = document.getElementsByClassName("hintHover")[0];
 	if (t == "mousemove") {
@@ -73,34 +79,11 @@ function iconEleMouseoverEvent(e) {
 	}
 }
 
-function PopulationClick(e) {
-	_statsIndex = 0;
+function setDataByIndex(e) {
+	var v = parseInt(e.getAttribute("value"));
+	_statsIndex = v;
 	setTaiwan();
 	resetColorBar();
-	// $("i").removeClass("selectedClass");
-	// $(e).addClass("selectedClass");
-
-}
-
-function TotalIncreaseClick(e) {
-	_statsIndex = 1;
-	setTaiwan();
-	resetColorBar();
-
-}
-
-function NaturalIncreaseClick(e) {
-	_statsIndex = 2;
-	setTaiwan();
-	resetColorBar();
-
-}
-
-function SocialIncreaseClick(e) {
-	_statsIndex = 3;
-	setTaiwan();
-	resetColorBar();
-
 }
 
 function resetColorBar() {
@@ -110,4 +93,31 @@ function resetColorBar() {
 	line[0].setAttribute("stop-color", colorRag[0]);
 	line[1].setAttribute("stop-color", colorRag[1]);
 
+}
+
+function contolSliderEvent(e) {
+	var v = e.getAttribute("value");
+	var slider = $("#dateSlider").data("ionRangeSlider");
+	var min = slider["result"]["min"];
+	var max = slider["result"]["max"];
+	var nValue = slider["result"]["from"];
+
+	if (v == "add") {
+		nValue += 1;
+		if (nValue > max)
+			nValue = 0;
+
+		slider.update({
+			from: nValue
+		});
+	} else if (v == "less") {
+		nValue -= 1;
+		if (nValue < min)
+			nValue = max;
+
+		slider.update({
+			from: nValue
+		});
+
+	}
 }
