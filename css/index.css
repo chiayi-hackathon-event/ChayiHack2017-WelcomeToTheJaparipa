@@ -29,7 +29,7 @@ body{
 
 .hintHover{
     position: absolute;
-    transition:.3s opacity 0s;
+    transition: .5s margin-right 10s,.5s color 10s,.7s opacity;
     right: 100px;
     width: 100%;
     background:rgba(0,0,0,0.5);
@@ -42,7 +42,8 @@ body{
 
 .hintSelected{
     position: absolute;
-    transition:.3s opacity 0s;
+    transition : .6s;
+    transition-timing-function: linear;
     right: 100px;
     width: 100%;
     color:#e0e0e0;
@@ -51,6 +52,7 @@ body{
     opacity: 1;
     font-size: 16px;
     white-space: pre;
+    top:20px;
 }
 
 button {

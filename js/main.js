@@ -45,10 +45,10 @@ function iconEleMouseoverEvent(e) {
 	var aEle = document.getElementsByClassName("hintHover")[0];
 	if (t == "mousemove") {
 		var a = document.getElementsByClassName("hintText")[0]; //設定文字
-		a.innerHTML = e.target.title;
 		aEle.style.opacity = 1; //顯示出來
 		var h = aEle.offsetHeight;
-		aEle.style.top = e.layerY - h / 2 + "px"; //置中
+		aEle.style.top = e.layerY - h / 2 + "px"; //置中 
+		a.innerHTML = e.target.title;
 
 
 
