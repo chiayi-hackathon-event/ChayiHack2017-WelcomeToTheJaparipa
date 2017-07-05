@@ -88,10 +88,7 @@ function setTaiwan() {
 	_taiwan.enter().append("path").attr({
 		"d": path,
 		"fill": function (d) {
-
 			return judgmentData(d);
-
-
 		}
 	});
 
@@ -125,8 +122,22 @@ function setTaiwan() {
 
 			//$("#info").hide();
 		}).on("click", function (d) {
+			$("img").remove(".marker");
+			var img = document.createElement("img");
+			$(img).css({ "position": "absolute" })
+			img.setAttribute("class", "marker");
+			img.setAttribute("src", "img/marker.png");
+			img.setAttribute("width", "35");
+			img.setAttribute("height", "56");
 
-			$(this).attr('fill', 'wihte');
+
+			$(img).css({
+				"top": (event.y - img.height) + "px",
+				"left": (event.x - img.width / 2) + "px"
+			});
+			$("body").append(img);
+
+			$(this).attr('fill', 'White');
 			updateMsg(d);
 		});
 	}
@@ -140,7 +151,7 @@ function updateMsg(d) {
 
 	$("#info").show();
 	$("#name").text(d.properties.C_Name);
-
+	msg += "日期：" + $("#dateSlider").data("ionRangeSlider").result.from_value + "<br/>";
 	msg += "總共：" + checkValue(eval(d["properties"]["人口數(人)"]) + "人<br/>");
 	msg += "總增加率：" + checkValue(eval(d["properties"]["總增加率"]) + "%<br/>");
 	msg += "自然增加率：" + checkValue(eval(d["properties"]["自然增加率"]) + "%<br/>");

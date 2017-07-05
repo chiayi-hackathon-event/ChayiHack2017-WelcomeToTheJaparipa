@@ -122,7 +122,11 @@ body {
     border-color: transparent #9D0300 transparent transparent;
 }
 
-button {
+.marker{
+       transition: .5s;
+}
+
+/*button {
     background-color: #4CAF50;
     border: 2px solid #4CAF50;
     color: white;
@@ -142,7 +146,7 @@ button:active {
     border: 2px solid #fff83f;
     color: #fff83f;
     font-size: 16px;
-}
+}*/
 #info {
     position: absolute;
     top: 54%;
@@ -159,7 +163,9 @@ button:active {
 }
 #data_type {
     font-size: 2em;
-    font-family: Microsoft JhengHei;
+    font-family: Vampiro One;
+    padding-left: 20px;
+
 }
 #name {
     font-size: 3em;
