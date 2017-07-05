@@ -51,7 +51,6 @@ body {
     padding: 15px;
     opacity: 0;
     font-size: 16px;
-    white-space: pre;
 }
 .hintSelected {
     position: absolute;
@@ -65,7 +64,6 @@ body {
     padding: 15px;
     opacity: 1;
     font-size: 16px;
-    white-space: pre;
     top: 20px;
 }
 .triangle {
@@ -90,8 +88,9 @@ body {
     height: 0;
     border-style: solid;
     border-width: 50px 86.6px 50px 0;
-    border-color: transparent #74d0ea transparent transparent;
+    border-color: transparent #afb1a0 transparent transparent;
     cursor: pointer;
+    transition: .5s;
 }
 .rightButton {
     position: absolute;
@@ -101,9 +100,28 @@ body {
     height: 0;
     border-style: solid;
     border-width: 50px 0 50px 86.6px;
-    border-color: transparent transparent transparent #74d0ea;
+    border-color: transparent transparent transparent #afb1a0;
     cursor: pointer;
+    transition: .5s;
 }
+
+.rightButton:hover{
+    border-color: transparent transparent transparent rgba(0, 0, 0, 0.5);
+}
+
+.rightButton:active{
+    border-color: transparent transparent transparent #9D0300;
+}
+
+
+.leftButton:hover{
+    border-color: transparent rgba(0, 0, 0, 0.5) transparent transparent;
+}
+
+.leftButton:active{
+    border-color: transparent #9D0300 transparent transparent;
+}
+
 button {
     background-color: #4CAF50;
     border: 2px solid #4CAF50;
@@ -127,15 +145,17 @@ button:active {
 }
 #info {
     position: absolute;
-    top: 50%;
-    left: 0;
-    text-align: center;
-    font-size: 60%;
-    background-color: #333;
+    top: 54%;
+    left: 16%;
+    font-size: 70%;
+    background-color: transparent;
     border-radius: 3px;
     padding: 2px 7px;
-    color: #fff;
+    color: rgba(66,139,202,1)  ;
     display: none;
+    height: 200px;
+    border-left: thick double #ff0000;
+    transition: .5s;
 }
 #data_type {
     font-size: 2em;
@@ -146,7 +166,7 @@ button:active {
     font-family: Microsoft JhengHei;
 }
 #case {
-    font-size: 3em;
+    font-size: 2em;
     font-family: Microsoft JhengHei;
 }
 .sliderEle {

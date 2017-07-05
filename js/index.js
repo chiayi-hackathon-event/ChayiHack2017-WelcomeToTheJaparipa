@@ -121,12 +121,12 @@ function setTaiwan() {
 
 		}).on("mouseleave", function (d) {
 
-			$(this).attr('fill', judgmentData(d));//
+			$(this).attr('fill', judgmentData(d));
 
 			//$("#info").hide();
 		}).on("click", function (d) {
 
-			$(this).attr('fill', 'gray');
+			$(this).attr('fill', 'wihte');
 			updateMsg(d);
 		});
 	}
