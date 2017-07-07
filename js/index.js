@@ -4,38 +4,46 @@ var _cDataIndex; //選到的資料
 var _features; //餵給D3.js(臺灣地圖)的資料格式
 var _taiwan;  //臺灣的元件
 var _statsIndex = 0;
+var _inComeData;
+var _depositsData;
 
 var _model = [
     {
         "id": "人口數(人)",
         "colorRag": ["#00FF00", "#FF0000"],
-        "range": [0, 3500000]
+        "range": [0, 3500000],
+        "type": "int"
     },
     {
         "id": "總增加率",
         "colorRag": ["#B9EDF8", "#0000A1"],
-        "range": [-3, 3]//600
+        "range": [-3, 3],
+        "type": "double"
     },
     {
         "id": "自然增加率",
         "colorRag": ["#F40076", "#35CE8D"],
-        "range": [-1, 1]
+        "range": [-1, 1],
+        "type": "double"
     },
     {
         "id": "社會增加率",
         "colorRag": ["#00303F", "#FF5A09"],
-        "range": [-2, 2]
+        "range": [-2, 2],
+        "type": "double"
     }
     ,
     {
-        "id": "所得收入總計",
-        "colorRag": ["#F40076", "#35CE8D"],
-        "range": [0, 1500000]
+        "id": "可支配所得",
+        "colorRag": ["#EE0000", "#0064E6"],
+        "range": [70000, 150000],
+        "type": "int"
     },
     {
         "id": "每戶儲蓄",
-        "colorRag": ["#00303F", "#FF5A09"],
-        "range": [0, 1000000]
+        "colorRag": ["#FFB85F", "#3E78B2"],
+        "range": [70000, 150000],
+        "type": "int"
     }
 ]
 
@@ -44,8 +52,31 @@ var _model = [
 
 $(document).ready(function () { //初始化
     setPopulationData(); //設定人口變動資料
+    setIncomeData();
+    setDepositsData();
     setMarker();
 });
+
+
+
+function setPopulationData() {
+    $.getJSON("datas/人口增加─按區域別分.json", function (data) { //載入資料
+        _oData = data;
+        setCountyData(); //設定縣市資料
+    });
+}
+
+function setIncomeData() {
+    $.getJSON("datas/各縣市別平均每戶可支配所得.json", function (data) { //載入資料
+        _inComeData = data;
+    });
+}
+
+function setDepositsData() {
+    $.getJSON("datas/各縣市別平均每戶儲蓄.json", function (data) { //載入資料
+        _depositsData = data;
+    });
+}
 
 function setMarker() {
     var img = document.createElement("img");
@@ -56,37 +87,37 @@ function setMarker() {
     $("body").append(img);
 }
 
-function setPopulationData() {
-    $.getJSON("datas/人口增加─按區域別分.json", function (data) { //載入資料
-        _oData = data;
-        setCountyData(); //設定縣市資料
-    });
-}
-
 function setCountyData() {
     d3.json("datas/county.json", function (topodata) { //因為原始資料檔案太大load太久，會導致後面的程式碼先執行，所以要包在裡面
         _features = topojson.feature(topodata, topodata.objects.county).features;
-        setDatas();
+        setDatas(null, 0);
     })
 }
 
-function setDatas(yearMon) {
-    if (!yearMon)
-        yearMon = getFirstValueFromObject();
+function setDatas(sData, type) {
+    if (!sData)
+        sData = getFirstValueFromObject();
 
-    _nData = _oData[yearMon];
+    _nData = sData;
     for (i = 0; i < _features.length; i++) {
         _features[i]["properties"]["人口數(人)"] = [];
         _features[i]["properties"]["總增加率"] = [];
         _features[i]["properties"]["自然增加率"] = [];
         _features[i]["properties"]["社會增加率"] = [];
-        for (j = 1; j < _nData.length; j++) {
-            if (normlizion_city_name(_features[i]["properties"]["C_Name"]) == normlizion_city_name(_nData[j]["地區"])) {
-                _features[i]["properties"]["人口數(人)"] = _nData[j]["人口數(人)"];
-                _features[i]["properties"]["總增加率"] = _nData[j]["總增加率"];
-                _features[i]["properties"]["自然增加率"] = _nData[j]["自然增加率"];
-                _features[i]["properties"]["社會增加率"] = _nData[j]["社會增加率"];
-
+        _features[i]["properties"]["可支配所得"] = [];
+        _features[i]["properties"]["每戶儲蓄"] = [];
+        for (j = 1; j < sData.length; j++) {
+            if (normlizion_city_name(_features[i]["properties"]["C_Name"]) == normlizion_city_name(sData[j]["地區"])) {
+                if (type == 0) {
+                    _features[i]["properties"]["人口數(人)"] = sData[j]["人口數(人)"];
+                    _features[i]["properties"]["總增加率"] = sData[j]["總增加率"];
+                    _features[i]["properties"]["自然增加率"] = sData[j]["自然增加率"];
+                    _features[i]["properties"]["社會增加率"] = sData[j]["社會增加率"];
+                } else if (type == 1) {
+                    _features[i]["properties"]["可支配所得"] = sData[j]["可支配所得"];
+                } else if (type == 2) {
+                    _features[i]["properties"]["每戶儲蓄"] = sData[j]["每戶儲蓄"];
+                }
             }
         }
     }
@@ -99,7 +130,7 @@ function getFirstValueFromObject() {
         firstValue = key;
         return false; //等於break
     });
-    return firstValue;
+    return _oData[firstValue];
 }
 
 
@@ -125,13 +156,10 @@ function setTaiwan() {
 
     function judgmentData(d) {
         var key = _model[_statsIndex]["id"];
-        if (_statsIndex == 0)
+        var type = _model[_statsIndex]["type"];
+        if (type == "int")
             return color(parseInt(eval(d["properties"][key])));
-        else if (_statsIndex == 1)
-            return color(parseFloat(eval(d["properties"][key])));
-        else if (_statsIndex == 2)
-            return color(parseFloat(eval(d["properties"][key])));
-        else if (_statsIndex == 3)
+        else if (type == "double")
             return color(parseFloat(eval(d["properties"][key])));
     }
 
@@ -185,18 +213,42 @@ function updateMsg(d) {
 
     $("#info").show();
     $("#name").text(d.properties.C_Name);
+    var key = "";
+    if (_statsIndex == 0)
+        key = "人口數(人)";
+    else if (_statsIndex == 1)
+        key = "總增加率";
+    else if (_statsIndex == 2)
+        key = "自然增加率";
+    else if (_statsIndex == 3)
+        key = "社會增加率";
+    else if (_statsIndex == 4)
+        key = "可支配所得";
+    else if (_statsIndex == 5)
+        key = "每戶儲蓄";
     msg += "日期：" + $("#dateSlider").data("ionRangeSlider").result.from_value + "<br/>";
-    msg += "總共：" + checkValue(eval(d["properties"]["人口數(人)"]) + "人<br/>");
-    msg += "總增加率：" + checkValue(eval(d["properties"]["總增加率"]) + "%<br/>");
-    msg += "自然增加率：" + checkValue(eval(d["properties"]["自然增加率"]) + "%<br/>");
-    msg += "社會增加率：" + checkValue(eval(d["properties"]["社會增加率"]) + "%<br/>");
+
+    var value = checkValue(eval(d["properties"][key]));
+    msg += key + "：" + value;
+    if (_statsIndex == 0)
+        msg + "人<br/>";
+    else if (_statsIndex == 1 || _statsIndex == 2 || _statsIndex == 3)
+        msg += "%<br/>";
+    else if (_statsIndex == 4 || _statsIndex == 5)
+        msg += "元<br/>";
+
+
+    // msg += "總共：" + checkValue(eval(d["properties"]["人口數(人)"]) + "人<br/>");
+    // msg += "總增加率：" + checkValue(eval(d["properties"]["總增加率"]) + "%<br/>");
+    // msg += "自然增加率：" + checkValue(eval(d["properties"]["自然增加率"]) + "%<br/>");
+    // msg += "社會增加率：" + checkValue(eval(d["properties"]["社會增加率"]) + "%<br/>");
     _cDataIndex = d["properties"]["OBJECTID"] - 1;
     $("#case").html(msg);
 }
 
 function checkValue(v) {
-    if (v.includes("undefined") || v == "-")
-        return " 資料有誤 <br/>";
+    if (!v)//|| v.includes("undefined") || v == "-"
+        return " 資料有誤 ";
     else
         return v;
 }

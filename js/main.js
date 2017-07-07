@@ -28,7 +28,7 @@ window.onload = function (e) {
 			onFinish: function (data) {
 				sliderEvent(data);
 			},
-			onUpdate: function (data) {
+			onUpdate: function (data) { //左右鍵
 				sliderEvent(data);
 			}
 		});
@@ -36,9 +36,24 @@ window.onload = function (e) {
 
 	function sliderEvent(data) {
 		var yearMon = data["from_value"];
-		// $("#data_type")[0].innerHTML = "民國 " + yearMon + " 臺灣各縣市人口數量";
+		var nowIndex = $(".selectedText")[0].getAttribute("value");
+		var sData; //show Data
+		var type;
+		if (nowIndex == "0" || nowIndex == "1" || nowIndex == "2" || nowIndex == "3") {//人口增加─按區域別分.json
+			type = 0;
+			sData = _oData[yearMon];
+		}
+		else if (nowIndex == "4") { //各縣市別平均每戶可支配所得.json
+			type = 1;
+			sData = _inComeData[yearMon];
+		}
+		else if (nowIndex == "5") {  //各縣市別平均每戶儲蓄.json
+			type = 2;
+			sData = _depositsData[yearMon];
+		}
+
 		_taiwan.exit().remove();
-		setDatas(yearMon);
+		setDatas(sData, type);
 		setTimeout(function () {
 			updateMsg(_features[_cDataIndex]);
 		}, 100);
@@ -67,24 +82,54 @@ function iconEleMouseoverEvent(e) {
 		var ih = e.target.offsetHeight;
 		var sh = selected.offsetHeight;
 		var h = (ih - sh) / 2;
+		var v = e.target.getAttribute("value");
 
 		a.innerHTML = text;
+		a.setAttribute("value", v);
 		selected.style.top = e.target.offsetTop + h + "px";
+
 
 	}
 	else if (t == "mouseout") {
 		aEle.style.opacity = 0; //隱藏起來
-
-
 	}
 }
 
 function setDataByIndex(e) {
 	var v = parseInt(e.getAttribute("value"));
 	_statsIndex = v;
+	updateSliderList(v);
+
+
 	setTaiwan();
 	resetColorBar();
 }
+
+function updateSliderList(index) {
+	var slider = $("#dateSlider").data("ionRangeSlider");
+	var list = [];
+	if (index < 4) {
+		for (var i in _oData) {
+			list.push(i);
+		}
+	}
+	else if (index == 4) {
+		for (var i in _inComeData) {
+			list.push(i);
+		}
+
+	} else if (index = 5) {
+		for (var i in _depositsData) {
+			list.push(i);
+		}
+	}
+
+	slider.update({
+		values: list
+	});
+
+}
+
 
 function resetColorBar() {
 	var colorRag = _model[_statsIndex]["colorRag"];
@@ -92,7 +137,6 @@ function resetColorBar() {
 	var line = document.getElementsByTagName("stop");
 	line[0].setAttribute("stop-color", colorRag[0]);
 	line[1].setAttribute("stop-color", colorRag[1]);
-
 }
 
 function contolSliderEvent(e) {
