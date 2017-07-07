@@ -1,13 +1,18 @@
-# 2017-7-16 Chiayi-Hackathon
+https://changyuhang.github.io/1052_Visualization_final_project/
 
-# [è³‡æ–™ä¾†æºçš†ç‚ºæ”¿åºœé–‹æ”¾è³‡æ–™å¹³å°](http://data.gov.tw)
+
+
+
+
+
 
 https://impaulapple.github.io/test/
 
-1. [äººå£å¢åŠ â”€æŒ‰å€åŸŸåˆ¥åˆ†](http://data.gov.tw/node/14223)
-2. [å®¶åº­æ”¶æ”¯è¨ªå•èª¿æŸ¥-å„ç¸£å¸‚åˆ¥å¹³å‡æ¯æˆ¶æ‰€å¾—æ”¶å…¥ç¸½è¨ˆ](http://data.gov.tw/node/9418)
-3. [å®¶åº­æ”¶æ”¯è¨ªå•èª¿æŸ¥-å„ç¸£å¸‚åˆ¥å¹³å‡æ¯æˆ¶å¯æ”¯é…æ‰€å¾—](http://data.gov.tw/node/9415)
-4. [å®¶åº­æ”¶æ”¯è¨ªå•èª¿æŸ¥-å„ç¸£å¸‚åˆ¥å¹³å‡æ¯æˆ¶æ‰€å¾—ç¸½é¡](http://data.gov.tw/node/9417)
-5. [å®¶åº­æ”¶æ”¯è¨ªå•èª¿æŸ¥-å„ç¸£å¸‚åˆ¥å¹³å‡æ¯æˆ¶æ¶ˆè²»æ”¯å‡º](http://data.gov.tw/node/9420)
-6. [å®¶åº­æ”¶æ”¯è¨ªå•èª¿æŸ¥-å„ç¸£å¸‚åˆ¥å¹³å‡æ¯æˆ¶å„²è“„](http://data.gov.tw/node/9416)
 
+¸ê®Æ¨Ó·½¬Ò¬°¬F©²¶}©ñ¸ê®Æ¥­¥xhttp://data.gov.tw
+1.¤H¤f¼W¥[¢w«ö°Ï°ì§O¤À¡Ghttp://data.gov.tw/node/14223
+2.®a®x¦¬¤ä³X°İ½Õ¬d-¦U¿¤¥«§O¥­§¡¨C¤á©Ò±o¦¬¤JÁ`­p¡Ghttp://data.gov.tw/node/9418
+3.®a®x¦¬¤ä³X°İ½Õ¬d-¦U¿¤¥«§O¥­§¡¨C¤á¥i¤ä°t©Ò±o¡Ghttp://data.gov.tw/node/9415
+4.®a®x¦¬¤ä³X°İ½Õ¬d-¦U¿¤¥«§O¥­§¡¨C¤á©Ò±oÁ`ÃB¡Ghttp://data.gov.tw/node/9417
+5.®a®x¦¬¤ä³X°İ½Õ¬d-¦U¿¤¥«§O¥­§¡¨C¤á®ø¶O¤ä¥X¡Ghttp://data.gov.tw/node/9420
+6.®a®x¦¬¤ä³X°İ½Õ¬d-¦U¿¤¥«§O¥­§¡¨C¤áÀx»W¡Ghttp://data.gov.tw/node/9416
