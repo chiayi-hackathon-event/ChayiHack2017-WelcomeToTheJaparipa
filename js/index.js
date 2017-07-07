@@ -35,8 +35,8 @@ var _model = [
     ,
     {
         "id": "可支配所得",
-        "colorRag": ["#EE0000", "#0064E6"],
-        "range": [400000, 1300000],
+        "colorRag": ["#b4b545", "#b54545"],
+        "range": [500000, 1000000],
         "type": "int"
     },
     {
@@ -230,27 +230,24 @@ function updateMsg(d) {
 
     var value = checkValue(eval(d["properties"][key]));
     msg += key + "：" + value;
-    if (_statsIndex == 0)
+    if (value.includes("尚無資料"))
+        msg += "<br/>";
+    else if (_statsIndex == 0)
         msg + "人<br/>";
     else if (_statsIndex == 1 || _statsIndex == 2 || _statsIndex == 3)
         msg += "%<br/>";
     else if (_statsIndex == 4 || _statsIndex == 5)
         msg += "元<br/>";
 
-
-    // msg += "總共：" + checkValue(eval(d["properties"]["人口數(人)"]) + "人<br/>");
-    // msg += "總增加率：" + checkValue(eval(d["properties"]["總增加率"]) + "%<br/>");
-    // msg += "自然增加率：" + checkValue(eval(d["properties"]["自然增加率"]) + "%<br/>");
-    // msg += "社會增加率：" + checkValue(eval(d["properties"]["社會增加率"]) + "%<br/>");
     _cDataIndex = d["properties"]["OBJECTID"] - 1;
     $("#case").html(msg);
 }
 
 function checkValue(v) {
-    if (!v)//|| v.includes("undefined") || v == "-"
-        return " 資料有誤 ";
+    if (!v || v.length == 0)
+        return " 尚無資料 ";
     else
-        return v;
+        return v + "";
 }
 
 function normlizion_city_name(city_name) {
