@@ -29,7 +29,7 @@ body {
 }
 .icon {
     cursor: pointer;
-    font-size: 60px;
+    font-size: 36px;
     padding: 10px;
 }
 .icon:hover {
@@ -44,20 +44,19 @@ body {
     position: absolute;
     transition: .7s opacity;
     right: 100px;
-    width: 100%;
     background: rgba(0, 0, 0, 0.5);
     border: rgba(0, 0, 0, 0.5);
     color: white;
     padding: 15px;
     opacity: 0;
     font-size: 16px;
+        white-space: nowrap;
 }
 .hintSelected {
     position: absolute;
     transition-property: top;
     transition: .5s;
     right: 100px;
-    width: 100%;
     color: #e0e0e0;
     background: #9D0300;
     border: #9D0300;
@@ -65,6 +64,7 @@ body {
     opacity: 1;
     font-size: 16px;
     top: 20px;
+        white-space: nowrap;
 }
 .triangle {
     left: inherit;
@@ -123,9 +123,24 @@ body {
 }
 
 .marker{
-       transition: .5s;
+    position: absolute;
+    display: none;
+}
+@font-face {
+    font-family: 'Glyphicons Halflings';
+    src: url(../fonts/glyphicons-halflings-regular.eot);
+    src: url(../fonts/glyphicons-halflings-regular.eot?#iefix) format('embedded-opentype'), url(../fonts/glyphicons-halflings-regular.woff2) format('woff2'), url(../fonts/glyphicons-halflings-regular.woff) format('woff'), url(../fonts/glyphicons-halflings-regular.ttf) format('truetype'), url(../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular) format('svg')
+}
+.glyphicon {
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale
 }
 
+.glyphicon-piggy-bank:before {
+    content: "\e225";
+}
 /*button {
     background-color: #4CAF50;
     border: 2px solid #4CAF50;

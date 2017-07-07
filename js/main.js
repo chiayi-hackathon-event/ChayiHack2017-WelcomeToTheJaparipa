@@ -11,7 +11,7 @@ window.onload = function (e) {
 
 
 	var ary = [];
-	$.getJSON("datas/data.json", function (data) {
+	$.getJSON("datas/人口增加─按區域別分.json", function (data) {
 		for (var i in data) {
 			ary.push(i);
 		}

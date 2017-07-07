@@ -9,7 +9,7 @@ var _model = [
 	{
 		"id": "人口數(人)",
 		"colorRag": ["#00FF00", "#FF0000"],
-		"range": [0, 10000]
+		"range": [0, 3500000]
 	},
 	{
 		"id": "總增加率",
@@ -26,6 +26,17 @@ var _model = [
 		"colorRag": ["#00303F", "#FF5A09"],
 		"range": [0, 20]
 	}
+    ,
+	{
+		"id": "所得收入總計",
+		"colorRag": ["#F40076", "#35CE8D"],
+		"range": [0, 1500000]
+	},
+	{
+		"id": "每戶儲蓄",
+		"colorRag": ["#00303F", "#FF5A09"],
+		"range": [0, 1000000]
+	}
 ]
 
 
@@ -33,10 +44,20 @@ var _model = [
 
 $(document).ready(function () { //初始化
 	setPopulationData(); //設定人口變動資料
+	setMarker();
 });
 
+function setMarker() {
+	var img = document.createElement("img");
+	img.setAttribute("class", "marker");
+	img.setAttribute("src", "img/marker.png");
+	img.setAttribute("width", "35");
+	img.setAttribute("height", "56");
+	$("body").append(img);
+}
+
 function setPopulationData() {
-	$.getJSON("datas/data.json", function (data) { //載入資料
+	$.getJSON("datas/人口增加─按區域別分.json", function (data) { //載入資料
 		_oData = data;
 		setCountyData(); //設定縣市資料
 	});
@@ -51,7 +72,7 @@ function setCountyData() {
 
 function setDatas(yearMon) {
 	if (!yearMon)
-		yearMon = "86年 1月";
+		yearMon = getFirstValueFromObject();
 
 	_nData = _oData[yearMon];
 	for (i = 0; i < _features.length; i++) {
@@ -71,6 +92,16 @@ function setDatas(yearMon) {
 	}
 	setTaiwan();
 }
+
+function getFirstValueFromObject() {
+	var firstValue;
+	$.each(_oData, function (key, value) {
+		firstValue = key;
+		return false; //等於break
+	});
+	return firstValue;
+}
+
 
 function setTaiwan() {
 
@@ -95,12 +126,12 @@ function setTaiwan() {
 	function judgmentData(d) {
 		var key = _model[_statsIndex]["id"];
 		if (_statsIndex == 0)
-			return color(parseInt(eval(d["properties"][key])) / 300);
+			return color(parseInt(eval(d["properties"][key])));
 		else if (_statsIndex == 1)
 			return color(parseFloat(eval(d["properties"][key]) + 3.00) * 100);
 		else if (_statsIndex == 2)
 			return color(parseFloat(eval(d["properties"][key]) + 1) * 10);
-		else //_statsIndex ==3
+		else if (_statsIndex == 3)
 			return color(parseFloat(eval(d["properties"][key]) + 1) * 10);
 	}
 
@@ -122,20 +153,23 @@ function setTaiwan() {
 
 			//$("#info").hide();
 		}).on("click", function (d) {
-			$("img").remove(".marker");
-			var img = document.createElement("img");
-			$(img).css({ "position": "absolute" })
-			img.setAttribute("class", "marker");
-			img.setAttribute("src", "img/marker.png");
-			img.setAttribute("width", "35");
-			img.setAttribute("height", "56");
+			var img = $(".marker")[0];
+
+			$(img).css({
+				"transition": "0s",
+				"opacity": "0",
+				"top": "0px",
+				"display":"block",
+				"left": (event.x - img.width / 2) + "px"
+			});
 
 
 			$(img).css({
+				"transition": ".5s",
+				"opacity": "1",
 				"top": (event.y - img.height) + "px",
 				"left": (event.x - img.width / 2) + "px"
 			});
-			$("body").append(img);
 
 			$(this).attr('fill', 'White');
 			updateMsg(d);
