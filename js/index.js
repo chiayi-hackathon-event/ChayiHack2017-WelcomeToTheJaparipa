@@ -80,12 +80,12 @@ function setDepositsData() {
 }
 
 function setMarker() {
-    var img = document.createElement("img");
-    img.setAttribute("class", "marker");
-    img.setAttribute("src", "img/marker.png");
-    img.setAttribute("width", "35");
-    img.setAttribute("height", "56");
-    $("body").append(img);
+    // var img = document.createElement("img");
+    // img.setAttribute("class", "marker");
+    // img.setAttribute("src", "img/marker.png");
+    // img.setAttribute("width", "35");
+    // img.setAttribute("height", "56");
+    // $("body").append(img);
 }
 
 function setCountyData() {
