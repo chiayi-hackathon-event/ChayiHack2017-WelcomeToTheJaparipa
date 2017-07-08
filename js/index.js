@@ -55,6 +55,7 @@ $(document).ready(function () { //初始化
     setIncomeData();
     setDepositsData();
     setMarker();
+    deviceSetting();
 });
 
 
@@ -92,6 +93,29 @@ function setCountyData() {
         _features = topojson.feature(topodata, topodata.objects.county).features;
         setDatas(null, 0);
     })
+}
+
+function deviceSetting() { //手機要有不同的設定
+    //是手機才要調整;
+    if (!isPhone())
+        return;
+
+    var map = document.getElementById("map");
+    map.setAttribute("height", "200%");
+    map.setAttribute("width", "200%");
+
+    var mapEle = document.getElementsByClassName("mapEle")[0];
+    mapEle.scrollLeft = 150;
+    mapEle.scrollTop = 245;
+
+
+}
+
+function isPhone() {
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
+        return true;
+    else
+        return false;
 }
 
 function setDatas(sData, type) {

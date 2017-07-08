@@ -102,22 +102,6 @@ body {
     border-color: transparent #afb1a0 transparent transparent;
     cursor: pointer;
     transition: .5s;
-    -webkit-touch-callout: none;
-    /* iOS Safari */
-    
-    -webkit-user-select: none;
-    /* Safari */
-    
-    -khtml-user-select: none;
-    /* Konqueror HTML */
-    
-    -moz-user-select: none;
-    /* Firefox */
-    
-    -ms-user-select: none;
-    /* Internet Explorer/Edge */
-    
-    user-select: none;
 }
 .rightButton {
     position: absolute;
@@ -131,60 +115,12 @@ body {
     border-color: transparent transparent transparent #afb1a0;
     cursor: pointer;
     transition: .5s;
-    -webkit-touch-callout: none;
-    /* iOS Safari */
-    
-    -webkit-user-select: none;
-    /* Safari */
-    
-    -khtml-user-select: none;
-    /* Konqueror HTML */
-    
-    -moz-user-select: none;
-    /* Firefox */
-    
-    -ms-user-select: none;
-    /* Internet Explorer/Edge */
-    
-    user-select: none;
 }
 .rightButton:hover {
     border-color: transparent transparent transparent rgba(0, 0, 0, 0.5);
-    -webkit-touch-callout: none;
-    /* iOS Safari */
-    
-    -webkit-user-select: none;
-    /* Safari */
-    
-    -khtml-user-select: none;
-    /* Konqueror HTML */
-    
-    -moz-user-select: none;
-    /* Firefox */
-    
-    -ms-user-select: none;
-    /* Internet Explorer/Edge */
-    
-    user-select: none;
 }
 .rightButton:active {
     border-color: transparent transparent transparent #9D0300;
-    -webkit-touch-callout: none;
-    /* iOS Safari */
-    
-    -webkit-user-select: none;
-    /* Safari */
-    
-    -khtml-user-select: none;
-    /* Konqueror HTML */
-    
-    -moz-user-select: none;
-    /* Firefox */
-    
-    -ms-user-select: none;
-    /* Internet Explorer/Edge */
-    
-    user-select: none;
 }
 .leftButton:hover {
     border-color: transparent rgba(0, 0, 0, 0.5) transparent transparent;
@@ -192,6 +128,13 @@ body {
 .leftButton:active {
     border-color: transparent #9D0300 transparent transparent;
 }
+
+.mapEle{
+    width:100%;
+    height:100%;
+    overflow: auto;
+}
+
 .marker {
     position: absolute;
     display: none;
