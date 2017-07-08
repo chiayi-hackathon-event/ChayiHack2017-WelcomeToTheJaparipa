@@ -1,24 +1,28 @@
+html,
 body {
-    /*background-image: url(../img/bg2.gif);
-    background-size: 100% 100%;*/
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#a7cfdf+0,23538a+100;Blue+3d+%238 */
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f1e767+0,feb645+100;Yellow+3D */
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#feffe8+0,d6dbbf+100;Wax+3D+%231 */
-    
-    background: #feffe8;
+    background: #feffff;
     /* Old browsers */
     
-    background: -moz-radial-gradient(center, ellipse cover, #feffe8 0%, #d6dbbf 100%);
+    background: -moz-radial-gradient(center, ellipse cover, #feffff 0%, #d2ebf9 100%);
     /* FF3.6-15 */
     
-    background: -webkit-radial-gradient(center, ellipse cover, #feffe8 0%, #d6dbbf 100%);
+    background: -webkit-radial-gradient(center, ellipse cover, #feffff 0%, #d2ebf9 100%);
     /* Chrome10-25,Safari5.1-6 */
     
-    background: radial-gradient(ellipse at center, #feffe8 0%, #d6dbbf 100%);
+    background: radial-gradient(ellipse at center, #feffff 0%, #d2ebf9 100%);
     /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     
-    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#feffe8', endColorstr='#d6dbbf', GradientType=1);
-    /* IE6-9 fallback on horizontal gradient */
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#feffff', endColorstr='#d2ebf9', GradientType=1);
+    height: 100%;
+}
+.header {
+    height: 10%;
+}
+.main {
+    height: 80%;
+}
+.footer {
+    height: 10%;
 }
 .iconsEle {
     position: absolute;
@@ -31,6 +35,22 @@ body {
     cursor: pointer;
     font-size: 36px;
     padding: 10px;
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    
+    -webkit-user-select: none;
+    /* Safari */
+    
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    
+    -moz-user-select: none;
+    /* Firefox */
+    
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    
+    user-select: none;
 }
 .icon:hover {
     color: #e0e0e0;
@@ -50,7 +70,7 @@ body {
     padding: 15px;
     opacity: 0;
     font-size: 16px;
-        white-space: nowrap;
+    white-space: nowrap;
 }
 .hintSelected {
     position: absolute;
@@ -64,7 +84,7 @@ body {
     opacity: 1;
     font-size: 16px;
     top: 20px;
-        white-space: nowrap;
+    white-space: nowrap;
 }
 .triangle {
     left: inherit;
@@ -91,6 +111,22 @@ body {
     border-color: transparent #afb1a0 transparent transparent;
     cursor: pointer;
     transition: .5s;
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    
+    -webkit-user-select: none;
+    /* Safari */
+    
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    
+    -moz-user-select: none;
+    /* Firefox */
+    
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    
+    user-select: none;
 }
 .rightButton {
     position: absolute;
@@ -103,26 +139,68 @@ body {
     border-color: transparent transparent transparent #afb1a0;
     cursor: pointer;
     transition: .5s;
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    
+    -webkit-user-select: none;
+    /* Safari */
+    
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    
+    -moz-user-select: none;
+    /* Firefox */
+    
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    
+    user-select: none;
 }
-
-.rightButton:hover{
+.rightButton:hover {
     border-color: transparent transparent transparent rgba(0, 0, 0, 0.5);
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    
+    -webkit-user-select: none;
+    /* Safari */
+    
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    
+    -moz-user-select: none;
+    /* Firefox */
+    
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    
+    user-select: none;
 }
-
-.rightButton:active{
+.rightButton:active {
     border-color: transparent transparent transparent #9D0300;
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    
+    -webkit-user-select: none;
+    /* Safari */
+    
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    
+    -moz-user-select: none;
+    /* Firefox */
+    
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    
+    user-select: none;
 }
-
-
-.leftButton:hover{
+.leftButton:hover {
     border-color: transparent rgba(0, 0, 0, 0.5) transparent transparent;
 }
-
-.leftButton:active{
+.leftButton:active {
     border-color: transparent #9D0300 transparent transparent;
 }
-
-.marker{
+.marker {
     position: absolute;
     display: none;
 }
@@ -137,7 +215,6 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale
 }
-
 .glyphicon-piggy-bank:before {
     content: "\e225";
 }
@@ -162,6 +239,7 @@ button:active {
     color: #fff83f;
     font-size: 16px;
 }*/
+
 #info {
     position: absolute;
     top: 54%;
@@ -170,7 +248,7 @@ button:active {
     background-color: transparent;
     border-radius: 3px;
     padding: 2px 7px;
-    color: rgba(66,139,202,1)  ;
+    color: rgba(66, 139, 202, 1);
     display: none;
     height: 200px;
     border-left: thick double #ff0000;
@@ -180,7 +258,6 @@ button:active {
     font-size: 2em;
     font-family: Vampiro One;
     padding-left: 20px;
-
 }
 #name {
     font-size: 3em;

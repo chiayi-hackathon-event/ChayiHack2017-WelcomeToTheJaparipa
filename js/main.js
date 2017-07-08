@@ -68,6 +68,9 @@ function iconEleMouseoverEvent(e) {
 		return;
 	var aEle = document.getElementsByClassName("hintHover")[0];
 	if (t == "mousemove") {
+		if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+			return; //手機不要hover
+		}
 		var a = document.getElementsByClassName("hintText")[0]; //設定文字
 		aEle.style.opacity = 1; //顯示出來
 		var h = aEle.offsetHeight;
