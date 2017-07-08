@@ -29,18 +29,14 @@ body {
     display: grid;
     right: 10px;
     top: 25%;
-    background-color: rgba(70, 70, 70, 0.34);
 }
 .icon {
     cursor: pointer;
     font-size: 36px;
     padding: 10px;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+    background-color: rgba(70, 70, 70, 0.34);
+    border-radius: 50%;
+    margin-top: 5px;
 }
 .icon:hover {
     color: #e0e0e0;
