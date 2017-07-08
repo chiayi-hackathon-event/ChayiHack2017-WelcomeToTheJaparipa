@@ -206,21 +206,31 @@ function setTaiwan() {
             //$("#info").hide();
         }).on("click", function (d) {
             var img = $(".marker")[0];
+            var mapEle = $(".mapEle")[0];
+            var t = mapEle.offsetTop; //底層的top
+            var l = mapEle.offsetLeft; //底層的left
+            var x = event.x;
+            var y = event.y;
+            if (isPhone()) {
+                x = x + mapEle.scrollLeft;
+                y = y + mapEle.scrollTop;
+            }
+
+
 
             $(img).css({
-                "transition": "0s",
+                "display": "block",
+                "transition": ".5s",
                 "opacity": "0",
                 "top": "0px",
-                "display": "block",
-                "left": (event.x - img.width / 2) + "px"
+                "left": (x - img.width / 2) + "px"
             });
-
 
             $(img).css({
                 "transition": ".5s",
                 "opacity": "1",
-                "top": (event.y - img.height) + "px",
-                "left": (event.x - img.width / 2) + "px"
+                "top": (y - t - img.height) + "px",
+                "left": (x - l - img.width / 2) + "px"
             });
 
             $(this).attr('fill', 'White');
@@ -232,7 +242,7 @@ function setTaiwan() {
 
 function updateMsg(d) {
     var msg = "";
-    if (!d) //甚麼都沒點 防呆
+    if (!d || isPhone()) //甚麼都沒點 防呆
         return;
 
     $("#info").show();
