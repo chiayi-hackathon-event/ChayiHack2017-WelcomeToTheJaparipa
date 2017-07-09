@@ -159,6 +159,10 @@ body {
         right:5%;
     }
 
+    .iconsEle{
+        top:12%;
+    }
+
 }
 
 .marker {
@@ -220,6 +224,7 @@ button:active {
     font-size: 2em;
     font-family: Vampiro One;
     padding-left: 20px;
+    background:rgba(175, 177, 160, 0.32);
 }
 #name {
     font-size: 3em;
