@@ -42,7 +42,7 @@ var _model = [
     {
         "id": "每戶儲蓄",
         "colorRag": ["#FFB85F", "#3E78B2"],
-        "range": [70000, 150000],
+        "range": [85000, 300000],
         "type": "int"
     }
 ]
