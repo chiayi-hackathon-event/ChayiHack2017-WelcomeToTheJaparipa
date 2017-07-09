@@ -108,7 +108,8 @@ function iconEleMouseoverEvent(e) {
 
 		a.innerHTML = text;
 		a.setAttribute("value", v);
-		selected.style.top = e.target.offsetTop + h + "px";
+		_selectedHintTop = e.target.offsetTop + h;
+		selected.style.top = _selectedHintTop + "px";
 
 
 	}
@@ -121,7 +122,6 @@ function setDataByIndex(e) {
 	var v = parseInt(e.getAttribute("value"));
 	_statsIndex = v;
 	updateSliderList(v);
-
 
 	setTaiwan();
 	resetColorBar();
@@ -187,11 +187,14 @@ function contolSliderEvent(e) {
 	}
 }
 
-function dropdown(e) {
-	if (!_expansion) { //展開
-		$("#ic").removeClass("rotate_start");
-		$("#ic").addClass("rotate_end");
+var _selectedHintTop;
 
+function dropdown(e) {
+	var iconCtrl = $("#ic");
+	var selected = document.getElementsByClassName("hintSelected")[0];
+	if (!_expansion) { //展開
+		iconCtrl.removeClass("rotate_start");
+		iconCtrl.addClass("rotate_end");
 		$("i").each(function (i) {
 			var _this = $(this);
 			setTimeout(function () {
@@ -199,10 +202,17 @@ function dropdown(e) {
 			}, i * 50);
 			_expansion = true;
 		});
+
+
+		if (!_selectedHintTop)
+			_selectedHintTop = 69.5;
+
+		selected.style.top = _selectedHintTop + "px";
+
 	}
 	else {
-		$("#ic").removeClass("rotate_end");
-		$("#ic").addClass("rotate_start");
+		iconCtrl.removeClass("rotate_end");
+		iconCtrl.addClass("rotate_start");
 		$($("i").get().reverse()).each(function (i) { //縮起來
 			if (i == 6)
 				return true;
@@ -212,5 +222,18 @@ function dropdown(e) {
 			}, i * 50);
 			_expansion = false;
 		});
+
+		var ih = iconCtrl[0].offsetHeight;
+		var sh = selected.offsetHeight;
+		var h = (ih - sh) / 2;
+
+		selected.style.top = iconCtrl[0].offsetTop + h + "px";
 	}
+}
+
+function getWhichNow() {
+	var selected = document.getElementsByClassName("selectedText")[0];
+	var index = selected.getAttribute("value");
+	index = parseInt(index) + 1;
+	return $("i")[index];
 }

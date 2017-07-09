@@ -146,11 +146,19 @@ body {
     position: relative;
 }
 
-/*響應是網頁，當網頁寬度大於500，就做下列東西*/
+/*響應式網頁，當網頁寬度大於500(網頁)，就做下列東西*/
 @media only screen and (min-width: 500px) {
     .mapEle {
         overflow: hidden;
     }
+}
+
+/*響應式網頁，當網頁寬度小於500(手機、平板)，就做下列東西*/
+@media only screen and (max-width: 500px) {
+    .rightButton{
+        right:5%;
+    }
+
 }
 
 .marker {
