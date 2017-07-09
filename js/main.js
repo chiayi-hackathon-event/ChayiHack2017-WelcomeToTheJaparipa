@@ -1,19 +1,17 @@
 var _expansion = false;
-
+var _selectedHintTop;
+var _fadeIn = new Audio('sounds/fadeIn.wav');
+var _fadeOut = new Audio('sounds/fadeOut.wav');
+var _press = new Audio('sounds/press.wav');
 
 
 window.onload = function (e) {
-
-
 
 	var iconEle = document.getElementsByClassName("iconsEle")[0];
 	iconEle.addEventListener("mousemove", iconEleMouseoverEvent, true);
 	iconEle.addEventListener("mouseout", iconEleMouseoverEvent, true);
 	iconEle.addEventListener("click", iconEleMouseoverEvent, true);
 	setPhoneView();
-
-
-
 
 
 	var ary = [];
@@ -111,7 +109,8 @@ function iconEleMouseoverEvent(e) {
 		_selectedHintTop = e.target.offsetTop + h;
 		selected.style.top = _selectedHintTop + "px";
 		if (isPhone()) {
-			dropClose();
+			_press.play();
+			dropClose(true);
 		}
 
 
@@ -125,7 +124,6 @@ function setDataByIndex(e) {
 	var v = parseInt(e.getAttribute("value"));
 	_statsIndex = v;
 	updateSliderList(v);
-
 	setTaiwan();
 	resetColorBar();
 }
@@ -190,7 +188,6 @@ function contolSliderEvent(e) {
 	}
 }
 
-var _selectedHintTop;
 
 function dropdown(e) {
 
@@ -204,9 +201,10 @@ function dropdown(e) {
 function dropOpen() {
 	var iconCtrl = $("#ic");
 	var selected = document.getElementsByClassName("hintSelected")[0];
-	iconCtrl[0].innerHTML =	"remove_circle_outline";
+	iconCtrl[0].innerHTML = "remove_circle_outline";
 	iconCtrl.removeClass("rotate_start");
 	iconCtrl.addClass("rotate_end");
+	_fadeIn.play();
 	$("i").each(function (i) {
 		var _this = $(this);
 		setTimeout(function () {
@@ -224,12 +222,14 @@ function dropOpen() {
 
 }
 
-function dropClose() {
+function dropClose(pressed) {
 	var iconCtrl = $("#ic");
 	var selected = document.getElementsByClassName("hintSelected")[0];
-		iconCtrl[0].innerHTML =	"add_circle_outline";
+	iconCtrl[0].innerHTML = "add_circle_outline";
 	iconCtrl.removeClass("rotate_end");
 	iconCtrl.addClass("rotate_start");
+	if (!pressed)
+		_fadeOut.play();
 	$($("i").get().reverse()).each(function (i) { //縮起來
 		if (i == 6)
 			return true;

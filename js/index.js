@@ -47,9 +47,6 @@ var _model = [
     }
 ]
 
-
-
-
 $(document).ready(function () { //初始化
     setPopulationData(); //設定人口變動資料
     setIncomeData();
