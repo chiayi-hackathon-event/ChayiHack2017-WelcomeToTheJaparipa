@@ -37,12 +37,14 @@
             <div class="hintSelected noselect"><a class="selectedText" value="0">人口數(人)</a>
                 <div class="triangle noselect"></div>
             </div>
-            <i class="material-icons icon noselect" title="人口數(人)" onclick="setDataByIndex(this)" value="0">person</i>
-            <i class="material-icons icon noselect" title="總增加率" onclick="setDataByIndex(this)" value="1">group_add</i>
-            <i class="material-icons icon noselect" title="自然增加率" onclick="setDataByIndex(this)" value="2">child_care</i>
-            <i class="material-icons icon noselect" title="社會增加率" onclick="setDataByIndex(this)" value="3">business_center</i>
-            <i class="material-icons icon noselect" title="可支配所得" onclick="setDataByIndex(this)" value="4">attach_money</i>
-            <i class="glyphicon icon noselect" title="每戶儲蓄" onclick="setDataByIndex(this)" value="5">&#xe225;</i>
+            <ul style="display: inherit; margin: 0;">
+                <i class="material-icons icon noselect" title="人口數(人)" onclick="setDataByIndex(this)" value="0">person</i>
+                <i class="material-icons icon noselect" title="總增加率" onclick="setDataByIndex(this)" value="1">group_add</i>
+                <i class="material-icons icon noselect" title="自然增加率" onclick="setDataByIndex(this)" value="2">child_care</i>
+                <i class="material-icons icon noselect" title="社會增加率" onclick="setDataByIndex(this)" value="3">business_center</i>
+                <i class="material-icons icon noselect" title="可支配所得" onclick="setDataByIndex(this)" value="4">attach_money</i>
+                <i class="glyphicon icon noselect" title="每戶儲蓄" onclick="setDataByIndex(this)" value="5">&#xe225;</i>
+            </ul>
         </div>
         <div class="leftButton noselect" value="less" unselectable="on" onclick="contolSliderEvent(this)"> </div>
         <div class="rightButton noselect" value="add" unselectable="on" onclick="contolSliderEvent(this)"> </div>
@@ -74,8 +76,8 @@
                     <tspan>較多</tspan>
                 </text>
                 <linearGradient id="Ruler" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="5%" stop-color="#090" />
-                    <stop offset="95%" stop-color="#F00" />
+                    <stop offset="5%" stop-color="#00FF00" />
+                    <stop offset="95%" stop-color="#FF0000" />
                 </linearGradient>
             </svg>
         </div>

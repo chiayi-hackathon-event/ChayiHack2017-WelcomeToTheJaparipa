@@ -54,7 +54,6 @@ $(document).ready(function () { //初始化
     setPopulationData(); //設定人口變動資料
     setIncomeData();
     setDepositsData();
-    setMarker();
     deviceSetting();
 });
 
@@ -79,15 +78,6 @@ function setDepositsData() {
     });
 }
 
-function setMarker() {
-    // var img = document.createElement("img");
-    // img.setAttribute("class", "marker");
-    // img.setAttribute("src", "img/marker.png");
-    // img.setAttribute("width", "35");
-    // img.setAttribute("height", "56");
-    // $("body").append(img);
-}
-
 function setCountyData() {
     d3.json("datas/county.json", function (topodata) { //因為原始資料檔案太大load太久，會導致後面的程式碼先執行，所以要包在裡面
         _features = topojson.feature(topodata, topodata.objects.county).features;
@@ -99,7 +89,6 @@ function deviceSetting() { //手機要有不同的設定
     //是手機才要調整;
     if (!isPhone())
         return;
-
     var map = document.getElementById("map");
     map.setAttribute("height", "200%");
     map.setAttribute("width", "200%");
@@ -107,8 +96,6 @@ function deviceSetting() { //手機要有不同的設定
     var mapEle = document.getElementsByClassName("mapEle")[0];
     mapEle.scrollLeft = 150;
     mapEle.scrollTop = 245;
-
-
 }
 
 function isPhone() {

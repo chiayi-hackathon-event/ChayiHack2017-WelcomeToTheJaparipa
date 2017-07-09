@@ -1,10 +1,16 @@
+var _expansion = false;
+
+
+
 window.onload = function (e) {
+
 
 
 	var iconEle = document.getElementsByClassName("iconsEle")[0];
 	iconEle.addEventListener("mousemove", iconEleMouseoverEvent, true);
 	iconEle.addEventListener("mouseout", iconEleMouseoverEvent, true);
 	iconEle.addEventListener("click", iconEleMouseoverEvent, true);
+	setPhoneView();
 
 
 
@@ -59,6 +65,19 @@ window.onload = function (e) {
 		}, 100);
 	}
 
+}
+
+function setPhoneView() {
+	if (!isPhone())
+		return;
+	$("ul").prepend('<i id="ic" class="material-icons icon noselect rotate_transition" onclick="dropdown(this)" value="-1">add_circle_outline</i>');
+
+	$("i").each(function (i) {
+		if (i == 0)
+			return true;
+		$(this).css({ "display": "none" });
+
+	});
 }
 
 function iconEleMouseoverEvent(e) {
@@ -136,7 +155,6 @@ function updateSliderList(index) {
 
 function resetColorBar() {
 	var colorRag = _model[_statsIndex]["colorRag"];
-
 	var line = document.getElementsByTagName("stop");
 	line[0].setAttribute("stop-color", colorRag[0]);
 	line[1].setAttribute("stop-color", colorRag[1]);
@@ -166,5 +184,33 @@ function contolSliderEvent(e) {
 			from: nValue
 		});
 
+	}
+}
+
+function dropdown(e) {
+	if (!_expansion) { //展開
+		$("#ic").removeClass("rotate_start");
+		$("#ic").addClass("rotate_end");
+
+		$("i").each(function (i) {
+			var _this = $(this);
+			setTimeout(function () {
+				_this.fadeIn();
+			}, i * 50);
+			_expansion = true;
+		});
+	}
+	else {
+		$("#ic").removeClass("rotate_end");
+		$("#ic").addClass("rotate_start");
+		$($("i").get().reverse()).each(function (i) { //縮起來
+			if (i == 6)
+				return true;
+			var _this = $(this);
+			setTimeout(function () {
+				_this.fadeOut();
+			}, i * 50);
+			_expansion = false;
+		});
 	}
 }
