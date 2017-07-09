@@ -204,6 +204,7 @@ function dropdown(e) {
 function dropOpen() {
 	var iconCtrl = $("#ic");
 	var selected = document.getElementsByClassName("hintSelected")[0];
+	iconCtrl[0].innerHTML =	"remove_circle_outline";
 	iconCtrl.removeClass("rotate_start");
 	iconCtrl.addClass("rotate_end");
 	$("i").each(function (i) {
@@ -216,14 +217,17 @@ function dropOpen() {
 
 
 	if (!_selectedHintTop)
-		_selectedHintTop = 69.5;
+		_selectedHintTop = 69.5;//預設第一次近來
 
 	selected.style.top = _selectedHintTop + "px";
+
+
 }
 
 function dropClose() {
 	var iconCtrl = $("#ic");
 	var selected = document.getElementsByClassName("hintSelected")[0];
+		iconCtrl[0].innerHTML =	"add_circle_outline";
 	iconCtrl.removeClass("rotate_end");
 	iconCtrl.addClass("rotate_start");
 	$($("i").get().reverse()).each(function (i) { //縮起來
