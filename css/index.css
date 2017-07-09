@@ -204,11 +204,10 @@ button:active {
     transition: .5s;
 }
 #data_type {
-    font-size: 2em;
+    font-size: 26px;
     font-family: cursive;
     background:rgba(175, 177, 160, 0.32);
         text-align: center;
-        padding: 15px;
 }
 #name {
     font-size: 3em;
@@ -264,6 +263,7 @@ button:active {
 
     #data_type{
             font-size: 20px;
+                    padding: 15px;
     }
 
 }
