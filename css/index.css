@@ -14,6 +14,7 @@ body {
     
     filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#feffff', endColorstr='#d2ebf9', GradientType=1);
     height: 100%;
+    font-family: cursive;
 }
 .header {
     height: 10%;
@@ -211,11 +212,9 @@ button:active {
 }
 #name {
     font-size: 3em;
-    font-family: Microsoft JhengHei;
 }
 #case {
     font-size: 2em;
-    font-family: Microsoft JhengHei;
 }
 .sliderEle {
     width: 75%;
