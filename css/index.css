@@ -146,30 +146,7 @@ body {
     position: relative;
 }
 
-/*響應式網頁，當網頁寬度大於500(網頁)，就做下列東西*/
-@media only screen and (min-width: 500px) {
-    .mapEle {
-        overflow: hidden;
-    }
-}
 
-/*響應式網頁，當網頁寬度小於500(手機、平板)，就做下列東西*/
-@media only screen and (max-width: 500px) {
-    .leftButton{
-         border-width: 30px 45px 30px 0;
-         top:80%;
-    }
-    .rightButton{
-        border-width: 30px 0 30px 45px;
-        top:80%;
-        right:5%;
-    }
-
-    .iconsEle{
-        top:12%;
-    }
-
-}
 
 .marker {
     position: absolute;
@@ -247,6 +224,48 @@ button:active {
 .colorBarEle {
     width: 25%;
     float: left;
+}
+
+/*響應式網頁，當網頁寬度大於500(網頁)，就做下列東西*/
+@media only screen and (min-width: 500px) {
+    .mapEle {
+        overflow: hidden;
+    }
+}
+
+/*響應式網頁，當網頁寬度小於500(手機、平板)，就做下列東西*/
+@media only screen and (max-width: 500px) {
+    .leftButton{
+         border-width: 30px 45px 30px 0;
+         top:80%;
+    }
+    .rightButton{
+        border-width: 30px 0 30px 45px;
+        top:80%;
+        right:5%;
+    }
+
+    .iconsEle{
+        top:12%;
+    }
+
+    .sliderEle{
+        width:100%;
+    }
+
+    .colorBarEle{
+        width:30%;
+    float: left;
+    position: fixed;
+    top: 75px;
+    left: 5%;
+    }
+
+    #data_type{
+            font-size: 20px;
+    height: 80px;
+    }
+
 }
 
 .rotate_start {

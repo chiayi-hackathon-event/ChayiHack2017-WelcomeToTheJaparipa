@@ -110,6 +110,9 @@ function iconEleMouseoverEvent(e) {
 		a.setAttribute("value", v);
 		_selectedHintTop = e.target.offsetTop + h;
 		selected.style.top = _selectedHintTop + "px";
+		if (isPhone()) {
+			dropClose();
+		}
 
 
 	}
@@ -190,45 +193,54 @@ function contolSliderEvent(e) {
 var _selectedHintTop;
 
 function dropdown(e) {
+
+	if (!_expansion)  //展開
+		dropOpen();
+	else
+		dropClose();
+
+}
+
+function dropOpen() {
 	var iconCtrl = $("#ic");
 	var selected = document.getElementsByClassName("hintSelected")[0];
-	if (!_expansion) { //展開
-		iconCtrl.removeClass("rotate_start");
-		iconCtrl.addClass("rotate_end");
-		$("i").each(function (i) {
-			var _this = $(this);
-			setTimeout(function () {
-				_this.fadeIn();
-			}, i * 50);
-			_expansion = true;
-		});
+	iconCtrl.removeClass("rotate_start");
+	iconCtrl.addClass("rotate_end");
+	$("i").each(function (i) {
+		var _this = $(this);
+		setTimeout(function () {
+			_this.fadeIn();
+		}, i * 50);
+		_expansion = true;
+	});
 
 
-		if (!_selectedHintTop)
-			_selectedHintTop = 69.5;
+	if (!_selectedHintTop)
+		_selectedHintTop = 69.5;
 
-		selected.style.top = _selectedHintTop + "px";
+	selected.style.top = _selectedHintTop + "px";
+}
 
-	}
-	else {
-		iconCtrl.removeClass("rotate_end");
-		iconCtrl.addClass("rotate_start");
-		$($("i").get().reverse()).each(function (i) { //縮起來
-			if (i == 6)
-				return true;
-			var _this = $(this);
-			setTimeout(function () {
-				_this.fadeOut();
-			}, i * 50);
-			_expansion = false;
-		});
+function dropClose() {
+	var iconCtrl = $("#ic");
+	var selected = document.getElementsByClassName("hintSelected")[0];
+	iconCtrl.removeClass("rotate_end");
+	iconCtrl.addClass("rotate_start");
+	$($("i").get().reverse()).each(function (i) { //縮起來
+		if (i == 6)
+			return true;
+		var _this = $(this);
+		setTimeout(function () {
+			_this.fadeOut();
+		}, i * 50);
+		_expansion = false;
+	});
 
-		var ih = iconCtrl[0].offsetHeight;
-		var sh = selected.offsetHeight;
-		var h = (ih - sh) / 2;
+	var ih = iconCtrl[0].offsetHeight;
+	var sh = selected.offsetHeight;
+	var h = (ih - sh) / 2;
 
-		selected.style.top = iconCtrl[0].offsetTop + h + "px";
-	}
+	selected.style.top = iconCtrl[0].offsetTop + h + "px";
 }
 
 function getWhichNow() {
