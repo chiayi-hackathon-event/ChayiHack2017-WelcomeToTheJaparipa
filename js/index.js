@@ -54,7 +54,10 @@ $(document).ready(function () { //初始化
     loadDepositsData();
     loadTaiwanNews();
     deviceSetting();
-     $( ".tabEle" ).draggable();
+    document.getElementsByTagName("svg")[0].addEventListener("click", function () {
+        $("path").addClass("choice");
+    },true);
+    $(".tabEle").draggable();
 });
 
 
@@ -79,7 +82,7 @@ function loadDepositsData() {
 }
 
 function loadTaiwanNews() {
-    $.getJSON("datas/臺灣大新聞.json", function (data) { //載入資料
+    $.getJSON("datas/臺灣大事件.json", function (data) { //載入資料
         _taiwanNews = data;
     });
 }
@@ -206,7 +209,7 @@ function setTaiwan() {
     var path = d3.geo.path().projection(prj);
     var color = d3.scale.linear().domain(range).range(colorRag);
     _taiwan = d3.select("#container").selectAll("path").data(_features);
-    _taiwan.enter().append("path").attr({
+    _taiwan.enter().append("path").attr("class", "choice").attr({
         "d": path,
         "fill": function (d) {
             return judgmentData(d);
@@ -239,8 +242,9 @@ function setTaiwan() {
             $(this).attr('fill', judgmentData(d));
 
         }).on("click", function (d) {
+            $(".choice").removeClass("choice");
 
-            $(this).attr('fill', 'White');
+            $(this).attr('fill', 'White').attr("class", "choice");
             updateMsg(d);
             setTabElement();
         });

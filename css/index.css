@@ -1,12 +1,13 @@
 html,
 body {
-    background: #feffff;
+    background: #fafafa;
+    /*background: #feffff;
     background: -moz-radial-gradient(center, ellipse cover, #feffff 0%, #d2ebf9 100%);
     background: -webkit-radial-gradient(center, ellipse cover, #feffff 0%, #d2ebf9 100%);
     background: radial-gradient(ellipse at center, #feffff 0%, #d2ebf9 100%);
     filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#feffff', endColorstr='#d2ebf9', GradientType=1);
-    height: 100%;
-    font-family: cursive;
+   */ height: 100%;
+    font-family: cwTeXHei, 微軟正黑體;
 }
 .header {
     height: 10%;
@@ -149,7 +150,7 @@ p{
 }
 .leftButton {
     position: absolute;
-    top: 70%;
+    top: 69.8%;
     left: 5%;
     width: 0;
     height: 0;
@@ -259,15 +260,19 @@ button:active {
 }
 #data_type {
     font-size: 26px;
-    font-family: cursive;
     background: rgba(175, 177, 160, 0.32);
     text-align: center;
+    font-weight: bolder;
 }
 #name {
     font-size: 3em;
+    color:#f99777;
+    font-weight: 900;
 }
 #case {
     font-size: 2em;
+    color:#fd768d;
+    font-weight: 400;
 }
 .sliderEle {
     width: 75%;
@@ -337,4 +342,12 @@ button:active {
     -moz-transition: all 0.6s ease-out;
     -o-transition: all 0.6s ease-out;
     transition: all 0.6s ease-out;
+}
+
+path{
+    opacity: 0.5;
+}
+
+.choice{
+    opacity: 1;
 }
