@@ -31,6 +31,7 @@ window.onload = function (e) {
 			// grid: true,
 			onFinish: function (data) {
 				sliderEvent(data);
+
 			},
 			onUpdate: function (data) { //左右鍵
 				sliderEvent(data);
@@ -61,6 +62,7 @@ window.onload = function (e) {
 		setTimeout(function () {
 			updateMsg(_features[_cDataIndex]);
 		}, 100);
+		setTabElement();
 	}
 
 }

@@ -239,17 +239,89 @@ function setTaiwan() {
 
         }).on("click", function (d) {
 
-            // var info = document.getElementById("info");
-            // $(this).parent().append(info);
-
             $(this).attr('fill', 'White');
             updateMsg(d);
+            setTabElement();
         });
     }
 
 
     update();
 }
+
+function openCity(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "inline-block";
+    evt.currentTarget.className += " active";
+}
+
+function setTabElement() {
+    var county = $("#name")[0].innerHTML;
+    document.getElementsByClassName("county")[0].innerHTML = county;
+    var dateTime = $("#dateSlider").data("ionRangeSlider").result.from_value;
+    $("h3", $(".tabcontent")).html("日期：" + dateTime);
+    $("p", $(".tabcontent")).remove();
+
+    if (!_taiwanNews[dateTime] || (_taiwanNews[dateTime][county].length == 0 && _taiwanNews[dateTime]["其他"].length == 0)) {
+        noNews(0);
+        return;
+    }
+
+
+    var countyNews = _taiwanNews[dateTime][county];
+    var othersNews = _taiwanNews[dateTime]["其他"];
+    if (countyNews.length == 0)//縣市沒資料
+        noNews(1);
+    else //縣市有資料
+        setNews(countyNews, 1);
+
+    if (othersNews == 0) //其他沒資料
+        noNews(2);
+    else //其他有資料
+        setNews(othersNews, 2);
+
+    function noNews(type) {
+
+        var parent = $(".tabcontent");
+        var p = "<p>很抱歉，當月尚無重大新聞。</p>";
+        if (type == 0) {
+            parent = $(".tabcontent");
+        } else if (type == 1)//縣市沒資料
+            parent = $("#countyStr");
+        else if (type == 2)//其他沒資料
+            parent = $("#othersStr");
+        parent.append(p);
+
+    }
+
+    function setNews(data, type) {
+        var parent;
+        if (type == 1)
+            parent = $("#countyStr");
+        else if (type == 2)//縣市沒資料
+            parent = $("#othersStr");
+
+
+        for (var i = 0; i < data.length; i++) {
+            var p = document.createElement("p");
+            p.innerHTML = data[i];
+            parent.append(p);
+        }
+
+
+    }
+
+}
+
+
 
 function updateMsg(d) {
     var msg = "";
