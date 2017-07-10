@@ -72,13 +72,13 @@ function loadIncomeData() {
 }
 
 function loadDepositsData() {
-  $.getJSON("datas/各縣市別平均每戶儲蓄.json", function (data) { //載入資料
+    $.getJSON("datas/各縣市別平均每戶儲蓄.json", function (data) { //載入資料
         _depositsData = data;
     });
 }
 
-function loadTaiwanNews(){
-  $.getJSON("datas/臺灣大新聞.json", function (data) { //載入資料
+function loadTaiwanNews() {
+    $.getJSON("datas/臺灣大新聞.json", function (data) { //載入資料
         _taiwanNews = data;
     });
 }
@@ -86,8 +86,66 @@ function loadTaiwanNews(){
 function setCountyData() {
     d3.json("datas/county.json", function (topodata) { //因為原始資料檔案太大load太久，會導致後面的程式碼先執行，所以要包在裡面
         _features = topojson.feature(topodata, topodata.objects.county).features;
+        setSvgEle();
         setDatas(null, 0);
     })
+}
+
+function setSvgEle() {
+    var mapEle = $(".mapEle")[0];
+    var margin = { top: -5, right: -5, bottom: -5, left: -5 },
+        width = mapEle.offsetWidth - margin.left - margin.right,
+        height = mapEle.offsetHeight - margin.top - margin.bottom;
+
+    var zoom = d3.behavior.zoom()
+        .scaleExtent([1, 10])
+        .on("zoom", zoomed);
+
+    var drag = d3.behavior.drag()
+        .origin(function (d) { return d; })
+        .on("drag", dragged);
+
+    var svg = d3.select("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.right + ")")
+        .call(zoom);
+
+    var rect = svg.append("rect")
+        .attr("width", width)
+        .attr("height", height)
+        .style("fill", "none")
+        .style("pointer-events", "all");
+
+    var container = svg.append("g")
+        .attr("id", "container");
+
+    // d3.tsv("dots.tsv", dottype, function (error, dots) {
+    //     dot = container.append("g")
+    //         .attr("class", "dot")
+    //         .selectAll("circle")
+    //         .data(data)
+    //         .enter().append("circle")
+    //         .attr("r", 5)
+    //         .attr("cx", function (d) { return d.x; })
+    //         .attr("cy", function (d) { return d.y; })
+    //         .call(drag);
+    // });
+
+    function dottype(d) {
+        d.x = +d.x;
+        d.y = +d.y;
+        return d;
+    }
+
+    function zoomed() {
+        container.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+    }
+
+    function dragged(d) {
+        d3.select(this).attr("cx", d.x = d3.event.x).attr("cy", d.y = d3.event.y);
+    }
 }
 
 function deviceSetting() { //手機要有不同的設定
@@ -103,12 +161,7 @@ function deviceSetting() { //手機要有不同的設定
     mapEle.scrollTop = 245;
 }
 
-function isPhone() {
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
-        return true;
-    else
-        return false;
-}
+
 
 function setDatas(sData, type) {
     if (!sData)
@@ -162,7 +215,7 @@ function setTaiwan() {
     };
     var path = d3.geo.path().projection(prj);
     var color = d3.scale.linear().domain(range).range(colorRag);
-    _taiwan = d3.select("svg").selectAll("path").data(_features);
+    _taiwan = d3.select("#container").selectAll("path").data(_features);
     _taiwan.enter().append("path").attr({
         "d": path,
         "fill": function (d) {
@@ -195,40 +248,17 @@ function setTaiwan() {
 
             $(this).attr('fill', judgmentData(d));
 
-            //$("#info").hide();
         }).on("click", function (d) {
-            var img = $(".marker")[0];
-            var mapEle = $(".mapEle")[0];
-            var t = mapEle.offsetTop; //底層的top
-            var l = mapEle.offsetLeft; //底層的left
-            var x = event.x;
-            var y = event.y;
-            if (isPhone()) {
-                x = x + mapEle.scrollLeft;
-                y = y + mapEle.scrollTop;
-            }
 
-
-
-            $(img).css({
-                "display": "block",
-                "transition": ".5s",
-                "opacity": "0",
-                "top": "0px",
-                "left": (x - img.width / 2) + "px"
-            });
-
-            $(img).css({
-                "transition": ".5s",
-                "opacity": "1",
-                "top": (y - t - img.height) + "px",
-                "left": (x - l - img.width / 2) + "px"
-            });
+            var info = document.getElementById("info");
+            $(this).parent().append(info);
 
             $(this).attr('fill', 'White');
             updateMsg(d);
         });
     }
+
+
     update();
 }
 
@@ -285,3 +315,9 @@ function normlizion_city_name(city_name) {
     return city_name;
 }
 
+function isPhone() {
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
+        return true;
+    else
+        return false;
+}
