@@ -54,6 +54,7 @@ $(document).ready(function () { //初始化
     loadDepositsData();
     loadTaiwanNews();
     deviceSetting();
+     $( ".tabEle" ).draggable();
 });
 
 

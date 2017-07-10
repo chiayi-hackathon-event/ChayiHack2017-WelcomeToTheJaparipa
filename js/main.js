@@ -61,8 +61,9 @@ window.onload = function (e) {
 		setDatas(sData, type);
 		setTimeout(function () {
 			updateMsg(_features[_cDataIndex]);
+			setTabElement();
 		}, 100);
-		setTabElement();
+
 	}
 
 }
