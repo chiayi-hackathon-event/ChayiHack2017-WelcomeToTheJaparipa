@@ -54,18 +54,16 @@ $(document).ready(function () { //初始化
     loadDepositsData();
     loadTaiwanNews();
     deviceSetting();
-    document.getElementsByTagName("svg")[0].addEventListener("click", function () {
-        $("path").addClass("choice");
-    },true);
-    $(".tabEle").draggable();
+    tabsSetting();
 });
-
-
 
 function setPopulationData() {
     $.getJSON("datas/人口增加─按區域別分.json", function (data) { //載入資料
         _oData = data;
         setCountyData(); //設定縣市資料
+        document.getElementsByTagName("svg")[0].addEventListener("click", function () { //點背景反彈
+            $("path").addClass("choice");
+        }, true);
     });
 }
 
@@ -386,4 +384,51 @@ function isPhone() {
         return true;
     else
         return false;
+}
+
+function tabsSetting() {
+    document.getElementById("defaultOpen").click();
+    var body = document.getElementsByTagName("body")[0];
+    var flag = 1;
+    var tab = document.getElementsByClassName("tab")[0];
+
+    tab.addEventListener("mousedown", function (e) {
+        onMouseDown(this, e);
+    }, false);
+    tab.addEventListener("mouseup", function (e) {
+        onMouseUp(e);
+    }, false);
+    tab.addEventListener("mousemove", function (e) {
+        onMouseMove(e);
+
+    }, false);
+
+    var anchorX = 0;
+    var anchorY = 0;
+    var draggedEl;
+    function onMouseDown(div, e) {
+        anchorX = e.x;
+        anchorY = e.y;
+
+        var p = div;
+        while (p.parentNode != null) {
+            anchorX -= p.offsetLeft - p.scrollLeft;
+            anchorY -= p.offsetTop - p.scrollTop;
+            p = p.parentNode;
+        }
+        draggedEl = div;
+    }
+
+    function onMouseMove(e) {
+        if (!draggedEl)
+            return;
+
+        draggedEl.parentElement.style.left = (e.x - anchorX) + "px";
+        draggedEl.parentElement.style.top = (e.y - anchorY) + "px";
+    }
+
+    function onMouseUp(e) {
+        draggedEl = null;
+
+    }
 }
