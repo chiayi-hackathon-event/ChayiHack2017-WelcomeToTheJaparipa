@@ -121,18 +121,6 @@ function setSvgEle() {
     var container = svg.append("g")
         .attr("id", "container");
 
-    // d3.tsv("dots.tsv", dottype, function (error, dots) {
-    //     dot = container.append("g")
-    //         .attr("class", "dot")
-    //         .selectAll("circle")
-    //         .data(data)
-    //         .enter().append("circle")
-    //         .attr("r", 5)
-    //         .attr("cx", function (d) { return d.x; })
-    //         .attr("cy", function (d) { return d.y; })
-    //         .call(drag);
-    // });
-
     function dottype(d) {
         d.x = +d.x;
         d.y = +d.y;
@@ -144,6 +132,7 @@ function setSvgEle() {
     }
 
     function dragged(d) {
+        event.preventDefault();
         d3.select(this).attr("cx", d.x = d3.event.x).attr("cy", d.y = d3.event.y);
     }
 }

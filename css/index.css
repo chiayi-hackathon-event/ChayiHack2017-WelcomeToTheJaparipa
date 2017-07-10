@@ -240,6 +240,11 @@ button:active {
 
     .iconsEle{
         top:12%;
+            z-index: 999;
+    }
+
+    .icon{
+            font-size: 24px;
     }
 
     .sliderEle{
