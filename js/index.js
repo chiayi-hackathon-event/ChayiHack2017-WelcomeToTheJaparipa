@@ -6,6 +6,7 @@ var _taiwan;  //臺灣的元件
 var _statsIndex = 0;
 var _inComeData;
 var _depositsData;
+var _taiwanNews;
 
 var _model = [
     {
@@ -49,8 +50,9 @@ var _model = [
 
 $(document).ready(function () { //初始化
     setPopulationData(); //設定人口變動資料
-    setIncomeData();
-    setDepositsData();
+    loadIncomeData();
+    loadDepositsData();
+    loadTaiwanNews();
     deviceSetting();
 });
 
@@ -63,15 +65,21 @@ function setPopulationData() {
     });
 }
 
-function setIncomeData() {
+function loadIncomeData() {
     $.getJSON("datas/各縣市別平均每戶可支配所得.json", function (data) { //載入資料
         _inComeData = data;
     });
 }
 
-function setDepositsData() {
-    $.getJSON("datas/各縣市別平均每戶儲蓄.json", function (data) { //載入資料
+function loadDepositsData() {
+  $.getJSON("datas/各縣市別平均每戶儲蓄.json", function (data) { //載入資料
         _depositsData = data;
+    });
+}
+
+function loadTaiwanNews(){
+  $.getJSON("datas/臺灣大新聞.json", function (data) { //載入資料
+        _taiwanNews = data;
     });
 }
 
