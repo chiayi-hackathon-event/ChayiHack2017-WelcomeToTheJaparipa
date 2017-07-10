@@ -239,8 +239,8 @@ function setTaiwan() {
 
         }).on("click", function (d) {
 
-            var info = document.getElementById("info");
-            $(this).parent().append(info);
+            // var info = document.getElementById("info");
+            // $(this).parent().append(info);
 
             $(this).attr('fill', 'White');
             updateMsg(d);
