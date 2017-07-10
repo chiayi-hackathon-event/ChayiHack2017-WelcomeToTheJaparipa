@@ -155,7 +155,7 @@ p{
 }
 .leftButton {
     position: absolute;
-    top: 69.8%;
+    top: 80%;
     left: 5%;
     width: 0;
     height: 0;
@@ -170,7 +170,7 @@ p{
 }
 .rightButton {
     position: absolute;
-    top: 70%;
+    top: 80%;
     right: 30%;
     width: 0;
     height: 0;
@@ -252,7 +252,7 @@ button:active {
 
 #info {
     position: absolute;
-    top: 70%;
+    top: 79.5%;
     left: 16%;
     font-size: 70%;
     background-color: transparent;
