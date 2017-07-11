@@ -417,7 +417,7 @@ function setTabElement() {
 
     function noNews(type) {
         var parent = $(".tabcontent");
-        var p = "<p>很抱歉，當月尚無重大新聞。</p>";
+        var p = "<p>很抱歉，尚無重大新聞。</p>";
         if (type == 0) {
             parent = $(".tabcontent");
         } else if (type == 1)//縣市沒資料
