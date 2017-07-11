@@ -245,7 +245,7 @@ p {
 }
 /*響應式網頁，當網頁寬度大於500(網頁)，就做下列東西*/
 
-@media only screen and (min-width: 500px) {
+@media only screen and (min-width: 770px) {
     .mapEle {
         overflow: hidden;
     }
@@ -281,8 +281,7 @@ p {
 }
 }
 /*響應式網頁，當網頁寬度小於500(手機、平板)，就做下列東西*/
-
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 770px) {
     .leftButton {
         border-width: 30px 45px 30px 0;
         top: 75%;
