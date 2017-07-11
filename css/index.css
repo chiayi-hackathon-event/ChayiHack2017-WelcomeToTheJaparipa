@@ -32,9 +32,9 @@ body {
 /* Style the tab */
 div.tab {
     overflow: hidden;
-    border: 1px solid #ccc;
     background-color: #86cdc7;
     cursor: move;
+    height :50px;
 }
 
 /* Style the buttons inside the tab */
@@ -64,11 +64,15 @@ div.tab button.active {
 /* Style the tab content */
 .tabcontent {
     background: white;
-    display: none;
+    display: block;
     overflow: auto;
-    height: 80%;
+    height: 0%;
     width:100%;
     background:rgba(95, 158, 160, 0.2);
+    transition: .5s;
+    opacity: 0;
+    position: absolute;
+    top:50px;
 }
 
 h3,p{

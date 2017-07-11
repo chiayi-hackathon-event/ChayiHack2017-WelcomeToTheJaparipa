@@ -32,17 +32,16 @@
     <div class="main">
         <div class="tabEle">
             <div class="tab">
-                <button class="county tablinks" onclick="openCity(event, 'countyStr')" id="defaultOpen">-</button>
-                <button class="others tablinks" onclick="openCity(event, 'othersStr')">其他</button>
+                <button class="county tablinks" name="county" onclick="openNews(event, 'countyStr')" id="defaultOpen">-</button>
+                <button class="others tablinks" name="others" onclick="openNews(event, 'othersStr')">其他</button>
             </div>
-            <div id="countyStr" class="tabcontent">
-                <span onclick="this.parentElement.style.display='none'" class="topright">x</span>
+            <div id="countyStr" name="display" class="tabcontent">
+                <span onclick="this.parentElement.style.height ='0%'" class="topright">x</span>
                 <h3>-</h3>
                 <p>請點選地圖任意地方，選取一個縣市</p>
             </div>
-
             <div id="othersStr" class="tabcontent">
-                <span onclick="this.parentElement.style.display='none'" class="topright">x</span>
+                <span onclick="this.parentElement.style.height ='0%'" class="topright">x</span>
                 <h3>-</h3>
                 <p>很抱歉，當月尚無重大新聞。</p>
             </div>

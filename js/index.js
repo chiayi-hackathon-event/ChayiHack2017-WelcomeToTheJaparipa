@@ -8,6 +8,10 @@ var _inComeData;
 var _depositsData;
 var _taiwanNews;
 
+var _month = ["1月", "2月", "3月", "4月",
+    "5月", "6月", "7月", "8月",
+    "9月", "10月", "11月", "12月",]
+
 var _model = [
     {
         "id": "人口數(人)",
@@ -153,6 +157,12 @@ function deviceSetting() { //手機要有不同的設定
 
     var tabEle = document.getElementsByClassName("tabEle")[0];
     tabEle.style.display = "none";
+
+    var text = document.getElementsByTagName("text")[0];
+    text.setAttribute("x", "0");
+    var tspan = $("tspan", text)[1];
+    tspan.innerHTML = "　　　　　　";
+
 }
 
 
@@ -255,100 +265,6 @@ function setTaiwan() {
     update();
 }
 
-function openCity(evt, cityName) {
-    var i, tabcontent, tablinks;
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-    }
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
-    document.getElementById(cityName).style.display = "inline-block";
-    evt.currentTarget.className += " active";
-}
-
-var _month = ["1月", "2月", "3月", "4月",
-    "5月", "6月", "7月", "8月",
-    "9月", "10月", "11月", "12月",]
-
-function setTabElement() {
-    if (isPhone())
-        return;
-    var county = $("#name")[0].innerHTML;
-    if (county)
-        document.getElementsByClassName("county")[0].innerHTML = county;
-    var dateTime = $("#dateSlider").data("ionRangeSlider").result.from_value;
-    $("h3", $(".tabcontent")).html("日期：" + dateTime);
-    $("p", $(".tabcontent")).remove();
-
-    if (!dateTime.includes("月") && county) { //如果只有年份
-        var news = [];
-        for (var i = 0; i < _month.length; i++) {
-            var nDateTime = dateTime + _month[i];
-            if (_taiwanNews[nDateTime][county].length > 0) {
-                var ary = _taiwanNews[nDateTime][county];
-                for (var k = 0; k < ary.length; k++) {
-                    news.push(ary[k]);
-                }
-            }
-        }
-        setNews(news, 1);
-        return;
-    }
-    else if (!_taiwanNews[dateTime] || !_taiwanNews[dateTime][county] || (_taiwanNews[dateTime][county].length == 0 && _taiwanNews[dateTime]["其他"].length == 0)) {
-        noNews(0);
-        return;
-    }
-
-
-    var countyNews = _taiwanNews[dateTime][county];
-    var othersNews = _taiwanNews[dateTime]["其他"];
-    if (countyNews.length == 0)//縣市沒資料
-        noNews(1);
-    else //縣市有資料
-        setNews(countyNews, 1);
-
-    if (othersNews == 0) //其他沒資料
-        noNews(2);
-    else //其他有資料
-        setNews(othersNews, 2);
-
-    function noNews(type) {
-        var parent = $(".tabcontent");
-        var p = "<p>很抱歉，當月尚無重大新聞。</p>";
-        if (type == 0) {
-            parent = $(".tabcontent");
-        } else if (type == 1)//縣市沒資料
-            parent = $("#countyStr");
-        else if (type == 2)//其他沒資料
-            parent = $("#othersStr");
-        parent.append(p);
-
-    }
-
-    function setNews(data, type) {
-        var parent;
-        if (type == 1)
-            parent = $("#countyStr");
-        else if (type == 2)//縣市沒資料
-            parent = $("#othersStr");
-
-
-        for (var i = 0; i < data.length; i++) {
-            var p = document.createElement("p");
-            p.innerHTML = data[i];
-            parent.append(p);
-        }
-
-
-    }
-
-}
-
-
-
 function updateMsg(d) {
     var msg = "";
     if (!d || isPhone()) //甚麼都沒點 防呆
@@ -407,6 +323,128 @@ function isPhone() {
         return true;
     else
         return false;
+}
+
+function openNews(e, cityName) {
+    var i, tabcontent, tablinks;
+    var tarName = e.target.name;
+    var oldContent = document.getElementsByName("display")[0]; //舊的
+    var newContent = document.getElementById(cityName); //新的
+    var show = { "height": "80%", "opacity": "1" };
+    var hide = { "height": "0%", "opacity": "0" };
+
+    if (oldContent == newContent) { //選到自己
+        if (newContent.offsetHeight == 0) {//是關起來的
+            $(newContent).css(show);
+        }
+        else {//是打開的
+            $(newContent).css(hide);
+        }
+
+    } else {
+        if (oldContent.offsetHeight > 0) {//沒打開
+            $(oldContent).css(hide);
+        }
+        $(newContent).css(show);
+    }
+    oldContent.setAttribute("name", null);
+    newContent.setAttribute("name", "display");
+
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) { //全部移除
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    e.currentTarget.className += " active"; //套用選到的效果
+}
+
+function setTabElement() {
+    if (isPhone())
+        return;
+    var county = $("#name")[0].innerHTML;
+    if (county)
+        document.getElementsByClassName("county")[0].innerHTML = county;
+    var dateTime = $("#dateSlider").data("ionRangeSlider").result.from_value;
+    $("h3", $(".tabcontent")).html("日期：" + dateTime);
+    $("p", $(".tabcontent")).remove();
+
+    if (!dateTime.includes("月") && county) { //如果只有年份
+        var cNews = [];
+        var oNews = [];
+        for (var i = 0; i < _month.length; i++) {
+            var nDateTime = dateTime + _month[i];
+            if (_taiwanNews[nDateTime][county].length > 0) {
+                var ary = _taiwanNews[nDateTime][county];
+                for (var k = 0; k < ary.length; k++) {
+                    cNews.push(ary[k]);
+                }
+            }
+            if (_taiwanNews[nDateTime]["其他"].length > 0) {
+                var ary = _taiwanNews[nDateTime]["其他"];
+                for (var k = 0; k < ary.length; k++) {
+                    oNews.push(ary[k]);
+                }
+            }
+
+        }
+        if (cNews.length == 0)
+            noNews(1);
+        else
+            setNews(cNews, 1);
+        if (oNews.length == 0) //其他沒資料
+            noNews(2);
+        else //其他有資料
+            setNews(oNews, 2);
+
+        return;
+    }
+    else if (!_taiwanNews[dateTime] || !_taiwanNews[dateTime][county] || (_taiwanNews[dateTime][county].length == 0 && _taiwanNews[dateTime]["其他"].length == 0)) {
+        noNews(0);
+        return;
+    }
+
+
+    var countyNews = _taiwanNews[dateTime][county];
+    var othersNews = _taiwanNews[dateTime]["其他"];
+    if (countyNews.length == 0)//縣市沒資料
+        noNews(1);
+    else //縣市有資料
+        setNews(countyNews, 1);
+
+    if (othersNews.length == 0) //其他沒資料
+        noNews(2);
+    else //其他有資料
+        setNews(othersNews, 2);
+
+    function noNews(type) {
+        var parent = $(".tabcontent");
+        var p = "<p>很抱歉，當月尚無重大新聞。</p>";
+        if (type == 0) {
+            parent = $(".tabcontent");
+        } else if (type == 1)//縣市沒資料
+            parent = $("#countyStr");
+        else if (type == 2)//其他沒資料
+            parent = $("#othersStr");
+        parent.append(p);
+
+    }
+
+    function setNews(data, type) {
+        var parent;
+        if (type == 1)
+            parent = $("#countyStr");
+        else if (type == 2)//縣市沒資料
+            parent = $("#othersStr");
+
+
+        for (var i = 0; i < data.length; i++) {
+            var p = document.createElement("p");
+            p.innerHTML = data[i];
+            parent.append(p);
+        }
+
+
+    }
+
 }
 
 function tabsSetting() {
