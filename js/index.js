@@ -274,6 +274,8 @@ var _month = ["1月", "2月", "3月", "4月",
     "9月", "10月", "11月", "12月",]
 
 function setTabElement() {
+    if (isPhone())
+        return;
     var county = $("#name")[0].innerHTML;
     if (county)
         document.getElementsByClassName("county")[0].innerHTML = county;
