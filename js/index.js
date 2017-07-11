@@ -101,7 +101,7 @@ function setSvgEle() {
     var mapEle = $(".mapEle")[0];
     var margin = { top: -5, right: -5, bottom: -5, left: -5 },
         width = mapEle.offsetWidth - margin.left - margin.right,
-        height = mapEle.offsetHeight - margin.top - margin.bottom;
+        height = mapEle.offsetHeight - margin.top - margin.bottom - 4;
 
     var zoom = d3.behavior.zoom()
         .scaleExtent([1, 10])
@@ -147,13 +147,12 @@ function deviceSetting() { //手機要有不同的設定
     //是手機才要調整;
     if (!isPhone())
         return;
-    var map = document.getElementById("map");
-    map.setAttribute("height", "200%");
-    map.setAttribute("width", "200%");
+    setMiddle(); //手機板 地圖設中間
 
-    var mapEle = document.getElementsByClassName("mapEle")[0];
-    mapEle.scrollLeft = 150;
-    mapEle.scrollTop = 245;
+
+
+
+
 
     var tabEle = document.getElementsByClassName("tabEle")[0];
     tabEle.style.display = "none";
@@ -163,6 +162,19 @@ function deviceSetting() { //手機要有不同的設定
     var tspan = $("tspan", text)[1];
     tspan.innerHTML = "　　　　　　";
 
+    var colorBar = $("rect", $(".colorBarEle"))[0];
+    colorBar.setAttribute("height", "50");
+
+    var container = $("#container");
+    function setMiddle() {
+        setTimeout(function () {
+            container = $("#container");
+            if (container.length == 0)
+                setMiddle();
+            else
+                $("#container").attr("transform", "translate(-650.4530924757012,-351.1409682004763)scale(3.0314330047719364)");
+        }, 50);
+    }
 }
 
 
