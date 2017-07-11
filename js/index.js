@@ -3,10 +3,12 @@ var _nData; //現在的資料
 var _cDataIndex; //選到的資料
 var _features; //餵給D3.js(臺灣地圖)的資料格式
 var _taiwan;  //臺灣的元件
+var _firstList = [];
 var _statsIndex = 0;
 var _inComeData;
 var _depositsData;
 var _taiwanNews;
+var _ctrlBtnTop;
 
 var _month = ["1月", "2月", "3月", "4月",
     "5月", "6月", "7月", "8月",
@@ -57,8 +59,8 @@ $(document).ready(function () { //初始化
     loadIncomeData();
     loadDepositsData();
     loadTaiwanNews();
-    deviceSetting();
     tabsSetting();
+    _ctrlBtnTop = document.getElementsByClassName("ctrlBtn")[0].offsetTop;
 });
 
 function setPopulationData() {
@@ -68,6 +70,10 @@ function setPopulationData() {
         document.getElementsByTagName("svg")[0].addEventListener("click", function () { //點背景反彈
             $("path").addClass("choice");
         }, true);
+
+        for (var i in data) {
+            _firstList.push(i);
+        }
     });
 }
 
@@ -142,42 +148,6 @@ function setSvgEle() {
         d3.select(this).attr("cx", d.x = d3.event.x).attr("cy", d.y = d3.event.y);
     }
 }
-
-function deviceSetting() { //手機要有不同的設定
-    //是手機才要調整;
-    if (!isPhone())
-        return;
-    setMiddle(); //手機板 地圖設中間
-
-
-
-
-
-
-    var tabEle = document.getElementsByClassName("tabEle")[0];
-    tabEle.style.display = "none";
-
-    var text = document.getElementsByTagName("text")[0];
-    text.setAttribute("x", "0");
-    var tspan = $("tspan", text)[1];
-    tspan.innerHTML = "　　　　　　";
-
-    var colorBar = $("rect", $(".colorBarEle"))[0];
-    colorBar.setAttribute("height", "50");
-
-    var container = $("#container");
-    function setMiddle() {
-        setTimeout(function () {
-            container = $("#container");
-            if (container.length == 0)
-                setMiddle();
-            else
-                $("#container").attr("transform", "translate(-650.4530924757012,-351.1409682004763)scale(3.0314330047719364)");
-        }, 50);
-    }
-}
-
-
 
 function setDatas(sData, type) {
     if (!sData)
@@ -266,7 +236,6 @@ function setTaiwan() {
 
         }).on("click", function (d) {
             $(".choice").removeClass("choice");
-
             $(this).attr('fill', 'White').attr("class", "choice");
             updateMsg(d);
             setTabElement();
@@ -279,7 +248,7 @@ function setTaiwan() {
 
 function updateMsg(d) {
     var msg = "";
-    if (!d || isPhone()) //甚麼都沒點 防呆
+    if (!d ) //甚麼都沒點 防呆|| isPhone()
         return;
 
     $("#info").show();
@@ -342,15 +311,26 @@ function openNews(e, cityName) {
     var tarName = e.target.name;
     var oldContent = document.getElementsByName("display")[0]; //舊的
     var newContent = document.getElementById(cityName); //新的
+
     var show = { "height": "80%", "opacity": "1" };
     var hide = { "height": "0%", "opacity": "0" };
+    if (isPhone()) {
+        show["height"] = "250px";
+        var footer = document.getElementsByClassName("footer")[0];
+        footer.style.top = $("html").height() - 350 + "px";
+        $(".ctrlBtn").css("top", _ctrlBtnTop - 250 + "px")
+    }
 
     if (oldContent == newContent) { //選到自己
-        if (newContent.offsetHeight == 0) {//是關起來的
-            $(newContent).css(show);
+        if (newContent.offsetHeight > 0) {//是關起來的
+            $(newContent).css(hide);
+            if (isPhone()) {
+                footer.style.top = $("html").height() - 100 + "px";
+                $(".ctrlBtn").css("top", _ctrlBtnTop  + "px")
+            }
         }
         else {//是打開的
-            $(newContent).css(hide);
+            $(newContent).css(show);
         }
 
     } else {
@@ -370,8 +350,8 @@ function openNews(e, cityName) {
 }
 
 function setTabElement() {
-    if (isPhone())
-        return;
+    // if (isPhone())
+    //     return;
     var county = $("#name")[0].innerHTML;
     if (county)
         document.getElementsByClassName("county")[0].innerHTML = county;
@@ -459,7 +439,10 @@ function setTabElement() {
 
 }
 
+//設定Tab的拖拉事件
 function tabsSetting() {
+    if (isPhone())
+        return;
     document.getElementById("defaultOpen").click();
     var body = document.getElementsByTagName("body")[0];
     var flag = 1;

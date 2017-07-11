@@ -11,18 +11,21 @@ window.onload = function (e) {
 	iconEle.addEventListener("mousemove", iconEleMouseoverEvent, true);
 	iconEle.addEventListener("mouseout", iconEleMouseoverEvent, true);
 	iconEle.addEventListener("click", iconEleMouseoverEvent, true);
+	setSlider();
 	setPhoneView();
+}
 
-
-	var ary = [];
-	$.getJSON("datas/人口增加─按區域別分.json", function (data) {
-		for (var i in data) {
-			ary.push(i);
-		}
-		setSlider(ary);
-
-	});
-
+function setSlider() {
+	setSliderList();
+	function setSliderList() {
+		setTimeout(function () {
+			container = $("#container");
+			if (_firstList.length == 0)
+				setSliderList();
+			else
+				setSlider(_firstList);
+		}, 50);
+	}
 
 	function setSlider(sliderAry) {
 		$("#dateSlider").ionRangeSlider({
@@ -65,20 +68,55 @@ window.onload = function (e) {
 		}, 100);
 
 	}
-
 }
 
 function setPhoneView() {
 	if (!isPhone())
 		return;
-	$("ul").prepend('<i id="ic" class="material-icons icon noselect rotate_transition" onclick="dropdown(this)" value="-1">add_circle_outline</i>');
 
-	$("i").each(function (i) {
-		if (i == 0)
-			return true;
-		$(this).css({ "display": "none" });
+	//設定手機板的Icon
+	setMobileIcon();
 
-	});
+	//地圖置中
+	setMiddle();
+
+	//colorBar 寬度調整
+	var text = document.getElementsByTagName("text")[0];
+	text.setAttribute("x", "0");
+	var tspan = $("tspan", text)[1];
+	tspan.innerHTML = "　　　　　　";
+
+	//colorBar 高度調高
+	var colorBar = $("rect", $(".colorBarEle"))[0];
+	colorBar.setAttribute("height", "50");
+
+	//資訊列大調整
+	var tabEle = document.getElementsByClassName("tabEle")[0];
+	var footer = document.getElementsByClassName("footer")[0];
+	var mobileInfoEle = document.getElementsByClassName("mobileInfoEle")[0];
+	footer.style.top = $("html").height() - 100 + "px";
+	mobileInfoEle.appendChild(tabEle);
+
+	function setMobileIcon() {
+		$("ul").prepend('<i id="ic" class="material-icons icon noselect rotate_transition" onclick="dropdown(this)" value="-1">add_circle_outline</i>');
+
+		$("i").each(function (i) {
+			if (i == 0)
+				return true;
+			$(this).css({ "display": "none" });
+		});
+	}
+
+	var container = $("#container");
+	function setMiddle() {
+		setTimeout(function () {
+			container = $("#container");
+			if (container.length == 0)
+				setMiddle();
+			else
+				$("#container").attr("transform", "translate(-650.4530924757012,-351.1409682004763)scale(3.0314330047719364)");
+		}, 50);
+	}
 }
 
 function iconEleMouseoverEvent(e) {
