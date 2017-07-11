@@ -266,14 +266,33 @@ function openCity(evt, cityName) {
     evt.currentTarget.className += " active";
 }
 
+var _month = ["1月", "2月", "3月", "4月",
+    "5月", "6月", "7月", "8月",
+    "9月", "10月", "11月", "12月",]
+
 function setTabElement() {
     var county = $("#name")[0].innerHTML;
-    document.getElementsByClassName("county")[0].innerHTML = county;
+    if (county)
+        document.getElementsByClassName("county")[0].innerHTML = county;
     var dateTime = $("#dateSlider").data("ionRangeSlider").result.from_value;
     $("h3", $(".tabcontent")).html("日期：" + dateTime);
     $("p", $(".tabcontent")).remove();
 
-    if (!_taiwanNews[dateTime] || (_taiwanNews[dateTime][county].length == 0 && _taiwanNews[dateTime]["其他"].length == 0)) {
+    if (!dateTime.includes("月") && county) { //如果只有年份
+        var news = [];
+        for (var i = 0; i < _month.length; i++) {
+            var nDateTime = dateTime + _month[i];
+            if (_taiwanNews[nDateTime][county].length > 0) {
+                var ary = _taiwanNews[nDateTime][county];
+                for (var k = 0; k < ary.length; k++) {
+                    news.push(ary[k]);
+                }
+            }
+        }
+        setNews(news, 1);
+        return;
+    }
+    else if (!_taiwanNews[dateTime] || !_taiwanNews[dateTime][county] || (_taiwanNews[dateTime][county].length == 0 && _taiwanNews[dateTime]["其他"].length == 0)) {
         noNews(0);
         return;
     }
@@ -292,7 +311,6 @@ function setTabElement() {
         setNews(othersNews, 2);
 
     function noNews(type) {
-
         var parent = $(".tabcontent");
         var p = "<p>很抱歉，當月尚無重大新聞。</p>";
         if (type == 0) {

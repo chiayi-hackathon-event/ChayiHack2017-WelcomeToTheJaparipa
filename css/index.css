@@ -9,6 +9,7 @@ body {
    */ height: 100%;
     font-family: cwTeXHei, 微軟正黑體;
 }
+
 .header {
     height: 10%;
     width: 100%;
@@ -16,7 +17,7 @@ body {
     z-index: 99999;
 }
 .main {
-    height: 90%;
+    height: 100%;
     position: relative;
 }
 
@@ -88,6 +89,9 @@ p{
 
 .footer {
     height: 10%;
+    position: fixed;
+    top: 90%;
+    width: 100%;
 }
 .iconsEle {
     position: absolute;
@@ -155,7 +159,7 @@ p{
 }
 .leftButton {
     position: absolute;
-    top: 80%;
+    top: 73%;
     left: 5%;
     width: 0;
     height: 0;
@@ -170,7 +174,7 @@ p{
 }
 .rightButton {
     position: absolute;
-    top: 80%;
+    top: 73%;
     right: 30%;
     width: 0;
     height: 0;
@@ -252,7 +256,7 @@ button:active {
 
 #info {
     position: absolute;
-    top: 79.5%;
+    top: 72.5%;
     left: 16%;
     font-size: 70%;
     background-color: transparent;
