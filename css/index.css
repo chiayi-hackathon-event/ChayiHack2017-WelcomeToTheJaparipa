@@ -227,8 +227,8 @@ p {
 }
 #data_type {
     font-size: 26px;
-    background: rgba(194, 208, 214, 0.5);
-    color: #4569b9;
+    background: rgba(0, 121, 107, 0.65);
+    color: white;
     text-shadow: 2px 2px 4px rgba(95, 158, 160, 0.3);
     box-shadow: 0px 8px 5px rgba(136, 136, 136, 0.4);
     text-align: center;
@@ -295,6 +295,9 @@ p {
         top: 12%;
         z-index: 999;
     }
+    .icon{
+        background-color: #afafaf;
+    }
 
     .sliderEle {
         width: 100%;
@@ -315,7 +318,6 @@ p {
         display: none !important; 
     }
 
-
     .mobileInfoEle {
         display: table;
         height: 65px;
@@ -328,9 +330,7 @@ p {
         padding: 20px 16px;
     }
 
-    .tabcontent{
-
-    }
+    
 
     .tabcontent p{
         margin: 15px 20px;
@@ -361,4 +361,16 @@ path {
 }
 .choice {
     opacity: 1;
+}
+
+.bg_mask {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    opacity: 0;
+    z-index: -999;
+    transition: .5s;
 }

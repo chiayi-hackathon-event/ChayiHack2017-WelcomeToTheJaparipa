@@ -240,6 +240,7 @@ function dropdown(e) {
 }
 
 function dropOpen() {
+	$(".bg_mask").css({ "opacity": "0.8", "z-index": "998" })
 	var iconCtrl = $("#ic");
 	var selected = document.getElementsByClassName("hintSelected")[0];
 	iconCtrl[0].innerHTML = "remove_circle_outline";
@@ -264,6 +265,8 @@ function dropOpen() {
 }
 
 function dropClose(pressed) {
+	$(".bg_mask").css({ "opacity": "0" });
+	setTimeout(function () { $(".bg_mask").css({ "z-index": "-999" }) }, 500);
 	var iconCtrl = $("#ic");
 	var selected = document.getElementsByClassName("hintSelected")[0];
 	iconCtrl[0].innerHTML = "add_circle_outline";
