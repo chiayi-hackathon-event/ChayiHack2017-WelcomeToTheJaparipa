@@ -150,6 +150,9 @@ function deviceSetting() { //手機要有不同的設定
     var mapEle = document.getElementsByClassName("mapEle")[0];
     mapEle.scrollLeft = 150;
     mapEle.scrollTop = 245;
+
+    var tabEle = document.getElementsByClassName("tabEle")[0];
+    tabEle.style.display = "none";
 }
 
 
