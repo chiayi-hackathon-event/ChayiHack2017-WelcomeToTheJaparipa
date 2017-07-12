@@ -360,6 +360,8 @@ function openNews(e, cityName) {
         show["height"] = "250px";
         footer.style.top = $("html").height() - 350 + "px";
         $(".ctrlBtn").css("top", _ctrlBtnTop - 250 + "px");
+
+        // $("#map")[0].addEventListener("click", phoneNewsEvent);
     }
 
     function newsClose_phone() {
