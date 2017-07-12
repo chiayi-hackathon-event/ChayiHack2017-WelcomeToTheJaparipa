@@ -97,6 +97,9 @@ function setPhoneView() {
 	footer.style.top = $("html").height() - 100 + "px";
 	mobileInfoEle.appendChild(tabEle);
 
+	//
+	$("#map")[0].addEventListener("click",bodyClickEvent,true);
+
 	function setMobileIcon() {
 		$("ul").prepend('<i id="ic" class="material-icons icon noselect rotate_transition" onclick="dropdown(this)" value="-1">add_circle_outline</i>');
 
@@ -112,15 +115,11 @@ function setPhoneView() {
 			container = $("#container");
 			if (container.length == 0)
 				setMiddle();
-			// else {
-			// 	var initTF = {};
-			// 	initTF["translate"] = [-650.4530924757012, -351.1409682004763]
-			// 	initTF["scale"] = 3;
-			// 	container.attr("transform", "translate(" + initTF.translate + ")scale(" + initTF.scale + ")");
-			// 	d3.behavior.zoom().translate = [-650.4530924757012, -351.1409682004763];
-			// 	d3.behavior.zoom().scale = 3;
-			// }
 		}, 500);
+	}
+
+	function bodyClickEvent(e){
+		alert(0);
 	}
 }
 

@@ -113,9 +113,9 @@ function setSvgEle() {
 
 
 
-    var zoom= d3.behavior.zoom()
-    .scaleExtent([1, 10])
-    .on("zoom", zoomed);
+    var zoom = d3.behavior.zoom()
+        .scaleExtent([1, 10])
+        .on("zoom", zoomed);
 
     if (isPhone()) //手機要設預設
         zoom.translate([-650.4530924757012, -351.1409682004763]).scale(3);
@@ -245,8 +245,11 @@ function setTaiwan() {
             if (!isPhone())
                 $(this).attr('fill', 'White');
             $(this).attr("class", "choice");
+            
+
             updateMsg(d);
             setTabElement();
+            $(".county").click();
         });
     }
     update();
@@ -338,7 +341,6 @@ function openNews(e, cityName) {
         else {//是打開的
             $(newContent).css(show);
         }
-
     } else {
         if (oldContent.offsetHeight > 0) {//沒打開
             $(oldContent).css(hide);
@@ -353,6 +355,14 @@ function openNews(e, cityName) {
         tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
     e.currentTarget.className += " active"; //套用選到的效果
+
+    function newsOpen(ele){
+
+    }
+
+    function newsClose(){
+
+    }
 }
 
 function setTabElement() {
