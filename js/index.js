@@ -3,12 +3,14 @@ var _nData; //現在的資料
 var _cDataIndex; //選到的資料
 var _features; //餵給D3.js(臺灣地圖)的資料格式
 var _taiwan;  //臺灣的元件
-var _firstList = [];
-var _statsIndex = 0;
+var _firstList = []; //Slider第一次的清單
+var _statsIndex = 0; //Icon第幾個
+var _nYearMon;//現在的Slider日期 (因為格式不一樣 ex：1994年5月 -> 2004年)
 var _inComeData;
 var _depositsData;
 var _taiwanNews;
 var _ctrlBtnTop;
+
 
 var _month = ["1月", "2月", "3月", "4月",
     "5月", "6月", "7月", "8月",
@@ -227,8 +229,8 @@ function setTaiwan() {
             },
             "stroke": 'green'
         }).on("mouseover", function (d, evnt) {
-
-            $(this).attr('fill', 'White');
+            if (!isPhone())
+                $(this).attr('fill', 'White');
 
         }).on("mouseleave", function (d) {
 
@@ -236,19 +238,19 @@ function setTaiwan() {
 
         }).on("click", function (d) {
             $(".choice").removeClass("choice");
-            $(this).attr('fill', 'White').attr("class", "choice");
+            if (!isPhone())
+                $(this).attr('fill', 'White');
+            $(this).attr("class", "choice");
             updateMsg(d);
             setTabElement();
         });
     }
-
-
     update();
 }
 
 function updateMsg(d) {
     var msg = "";
-    if (!d ) //甚麼都沒點 防呆|| isPhone()
+    if (!d) //甚麼都沒點 防呆|| isPhone()
         return;
 
     $("#info").show();
@@ -326,7 +328,7 @@ function openNews(e, cityName) {
             $(newContent).css(hide);
             if (isPhone()) {
                 footer.style.top = $("html").height() - 100 + "px";
-                $(".ctrlBtn").css("top", _ctrlBtnTop  + "px")
+                $(".ctrlBtn").css("top", _ctrlBtnTop + "px")
             }
         }
         else {//是打開的
@@ -356,7 +358,10 @@ function setTabElement() {
     if (county)
         document.getElementsByClassName("county")[0].innerHTML = county;
     var dateTime = $("#dateSlider").data("ionRangeSlider").result.from_value;
-    $("h3", $(".tabcontent")).html("日期：" + dateTime);
+    if (isPhone())
+        $("h3", $(".tabcontent")).html($("#case")[0].innerHTML);
+    else
+        $("h3", $(".tabcontent")).html("日期：" + dateTime);
     $("p", $(".tabcontent")).remove();
 
     if (!dateTime.includes("月") && county) { //如果只有年份

@@ -134,9 +134,6 @@ function iconEleMouseoverEvent(e) {
 		var h = aEle.offsetHeight;
 		aEle.style.top = e.layerY - h / 2 + "px"; //置中 
 		a.innerHTML = text;
-
-
-
 	} else if (t == "click") {
 		var selected = document.getElementsByClassName("hintSelected")[0];
 		var a = document.getElementsByClassName("selectedText")[0]; //設定文字
@@ -153,8 +150,6 @@ function iconEleMouseoverEvent(e) {
 			_press.play();
 			dropClose(true);
 		}
-
-
 	}
 	else if (t == "mouseout") {
 		aEle.style.opacity = 0; //隱藏起來
@@ -171,25 +166,36 @@ function setDataByIndex(e) {
 
 function updateSliderList(index) {
 	var slider = $("#dateSlider").data("ionRangeSlider");
+	var data;
+	var from_value = slider["result"]["from_value"];
+	var from = 0;
+	var i = 0;
 	var list = [];
-	if (index < 4) {
-		for (var i in _oData) {
-			list.push(i);
-		}
-	}
-	else if (index == 4) {
-		for (var i in _inComeData) {
-			list.push(i);
-		}
 
-	} else if (index = 5) {
-		for (var i in _depositsData) {
-			list.push(i);
-		}
+
+	if (index < 4)
+		data = _oData;
+	else if (index == 4)
+		data = _inComeData;
+	else if (index = 5)
+		data = _depositsData;
+
+	if (index < 4 && !from_value.includes("月"))
+		from_value = from_value + "1月";
+	else if (index > 3 && from_value.includes("月"))
+		from_value = from_value.split('年')[0] + "年";
+
+	for (var key in data) {
+		if (key == from_value)
+			from = i;
+		list.push(key);
+		i++;
 	}
+
 
 	slider.update({
-		values: list
+		"values": list,
+		"from": from
 	});
 
 }
@@ -231,12 +237,10 @@ function contolSliderEvent(e) {
 
 
 function dropdown(e) {
-
 	if (!_expansion)  //展開
 		dropOpen();
 	else
 		dropClose();
-
 }
 
 function dropOpen() {
@@ -255,13 +259,10 @@ function dropOpen() {
 		_expansion = true;
 	});
 
-
 	if (!_selectedHintTop)
 		_selectedHintTop = 69.5;//預設第一次近來
 
 	selected.style.top = _selectedHintTop + "px";
-
-
 }
 
 function dropClose(pressed) {
