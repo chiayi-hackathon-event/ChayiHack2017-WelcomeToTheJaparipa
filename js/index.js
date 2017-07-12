@@ -111,12 +111,19 @@ function setSvgEle() {
         width = mapEle.offsetWidth - margin.left - margin.right,
         height = mapEle.offsetHeight - margin.top - margin.bottom - 4;
 
-    var zoom = d3.behavior.zoom()
-        .scaleExtent([1, 10])
-        .on("zoom", zoomed);
+
+
+    var zoom= d3.behavior.zoom()
+    .scaleExtent([1, 10])
+    .on("zoom", zoomed);
+
+    if (isPhone()) //手機要設預設
+        zoom.translate([-650.4530924757012, -351.1409682004763]).scale(3);
 
     var drag = d3.behavior.drag()
-        .origin(function (d) { return d; })
+        .origin(function (d) {
+            return d;
+        })
         .on("drag", dragged);
 
     var svg = d3.select("svg")
@@ -135,18 +142,15 @@ function setSvgEle() {
     var container = svg.append("g")
         .attr("id", "container");
 
-    function dottype(d) {
-        d.x = +d.x;
-        d.y = +d.y;
-        return d;
-    }
+    if (isPhone())//手機要設預設-2
+        container.attr("transform", "translate(-650.4530924757012, -351.1409682004763)scale(3)");
 
     function zoomed() {
         container.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
     }
 
     function dragged(d) {
-        event.preventDefault();
+        // event.preventDefault();
         d3.select(this).attr("cx", d.x = d3.event.x).attr("cy", d.y = d3.event.y);
     }
 }

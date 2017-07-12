@@ -107,15 +107,20 @@ function setPhoneView() {
 		});
 	}
 
-	var container = $("#container");
 	function setMiddle() {
 		setTimeout(function () {
 			container = $("#container");
 			if (container.length == 0)
 				setMiddle();
-			else
-				$("#container").attr("transform", "translate(-650.4530924757012,-351.1409682004763)scale(3.0314330047719364)");
-		}, 50);
+			// else {
+			// 	var initTF = {};
+			// 	initTF["translate"] = [-650.4530924757012, -351.1409682004763]
+			// 	initTF["scale"] = 3;
+			// 	container.attr("transform", "translate(" + initTF.translate + ")scale(" + initTF.scale + ")");
+			// 	d3.behavior.zoom().translate = [-650.4530924757012, -351.1409682004763];
+			// 	d3.behavior.zoom().scale = 3;
+			// }
+		}, 500);
 	}
 }
 
