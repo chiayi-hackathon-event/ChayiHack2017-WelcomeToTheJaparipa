@@ -66,7 +66,7 @@ $(document).ready(function () { //初始化
 });
 
 function setPopulationData() {
-    $.getJSON("datas/人口增加─按區域別分.json", function (data) { //載入資料
+    $.getJSON("datas/_oData.json", function (data) { //載入資料
         _oData = data;
         setCountyData(); //設定縣市資料
         document.getElementsByTagName("svg")[0].addEventListener("click", function () { //點背景反彈
@@ -80,19 +80,19 @@ function setPopulationData() {
 }
 
 function loadIncomeData() {
-    $.getJSON("datas/各縣市別平均每戶可支配所得.json", function (data) { //載入資料
+    $.getJSON("datas/_inComeData.json", function (data) { //載入資料
         _inComeData = data;
     });
 }
 
 function loadDepositsData() {
-    $.getJSON("datas/各縣市別平均每戶儲蓄.json", function (data) { //載入資料
+    $.getJSON("datas/_depositsData.json", function (data) { //載入資料
         _depositsData = data;
     });
 }
 
 function loadTaiwanNews() {
-    $.getJSON("datas/臺灣大事件.json", function (data) { //載入資料
+    $.getJSON("datas/_taiwanNews.json", function (data) { //載入資料
         _taiwanNews = data;
     });
 }
@@ -245,11 +245,12 @@ function setTaiwan() {
             if (!isPhone())
                 $(this).attr('fill', 'White');
             $(this).attr("class", "choice");
-            
+
 
             updateMsg(d);
             setTabElement();
-            $(".county").click();
+            if (isPhone())
+                $(".county").click();
         });
     }
     update();
@@ -320,28 +321,20 @@ function openNews(e, cityName) {
     var tarName = e.target.name;
     var oldContent = document.getElementsByName("display")[0]; //舊的
     var newContent = document.getElementById(cityName); //新的
-
     var show = { "height": "80%", "opacity": "1" };
     var hide = { "height": "0%", "opacity": "0" };
-    if (isPhone()) {
-        show["height"] = "250px";
-        var footer = document.getElementsByClassName("footer")[0];
-        footer.style.top = $("html").height() - 350 + "px";
-        $(".ctrlBtn").css("top", _ctrlBtnTop - 250 + "px")
-    }
+    var footer = document.getElementsByClassName("footer")[0];
 
+    newsOpen_phone();
     if (oldContent == newContent) { //選到自己
-        if (newContent.offsetHeight > 0) {//是關起來的
+        if (newContent.offsetHeight > 0) {//是打開的
             $(newContent).css(hide);
-            if (isPhone()) {
-                footer.style.top = $("html").height() - 100 + "px";
-                $(".ctrlBtn").css("top", _ctrlBtnTop + "px")
-            }
+            newsClose_phone();
         }
-        else {//是打開的
+        else {//是關起來的
             $(newContent).css(show);
         }
-    } else {
+    } else { //選到另一個
         if (oldContent.offsetHeight > 0) {//沒打開
             $(oldContent).css(hide);
         }
@@ -354,20 +347,33 @@ function openNews(e, cityName) {
     for (i = 0; i < tablinks.length; i++) { //全部移除
         tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
-    e.currentTarget.className += " active"; //套用選到的效果
 
-    function newsOpen(ele){
+    if (e.currentTarget)
+        e.currentTarget.className += " active"; //套用選到的效果
+    else
+        document.getElementsByName("county")[0].className += " active"; //點地圖的話會沒東西
 
+
+    function newsOpen_phone() {
+        if (!isPhone())
+            return;
+        show["height"] = "250px";
+        footer.style.top = $("html").height() - 350 + "px";
+        $(".ctrlBtn").css("top", _ctrlBtnTop - 250 + "px");
     }
 
-    function newsClose(){
-
+    function newsClose_phone() {
+        if (!isPhone())
+            return;
+        footer.style.top = $("html").height() - 100 + "px";
+        $(".ctrlBtn").css("top", _ctrlBtnTop + "px");
+    }
+    function phoneNewsEvent(e) {
+        alert(0);
     }
 }
 
 function setTabElement() {
-    // if (isPhone())
-    //     return;
     var county = $("#name")[0].innerHTML;
     if (county)
         document.getElementsByClassName("county")[0].innerHTML = county;

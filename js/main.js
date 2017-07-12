@@ -98,7 +98,7 @@ function setPhoneView() {
 	mobileInfoEle.appendChild(tabEle);
 
 	//
-	$("#map")[0].addEventListener("click",bodyClickEvent,true);
+
 
 	function setMobileIcon() {
 		$("ul").prepend('<i id="ic" class="material-icons icon noselect rotate_transition" onclick="dropdown(this)" value="-1">add_circle_outline</i>');
