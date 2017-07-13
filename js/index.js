@@ -66,7 +66,7 @@ $(document).ready(function () { //初始化
 });
 
 function setPopulationData() {
-    $.getJSON("datas/_oData.json", function (data) { //載入資料
+    $.getJSON("datas/人口增加─按區域別分.json", function (data) { //載入資料
         _oData = data;
         setCountyData(); //設定縣市資料
         document.getElementsByTagName("svg")[0].addEventListener("click", function () { //點背景反彈
@@ -80,19 +80,19 @@ function setPopulationData() {
 }
 
 function loadIncomeData() {
-    $.getJSON("datas/_inComeData.json", function (data) { //載入資料
+    $.getJSON("datas/各縣市別平均每戶可支配所得.json", function (data) { //載入資料
         _inComeData = data;
     });
 }
 
 function loadDepositsData() {
-    $.getJSON("datas/_depositsData.json", function (data) { //載入資料
+    $.getJSON("datas/各縣市別平均每戶儲蓄.json", function (data) { //載入資料
         _depositsData = data;
     });
 }
 
 function loadTaiwanNews() {
-    $.getJSON("datas/_taiwanNews.json", function (data) { //載入資料
+    $.getJSON("datas/臺灣大事件.json", function (data) { //載入資料
         _taiwanNews = data;
     });
 }
