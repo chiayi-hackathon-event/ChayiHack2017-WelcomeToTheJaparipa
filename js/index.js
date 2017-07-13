@@ -249,7 +249,7 @@ function setTaiwan() {
 
             updateMsg(d);
             setTabElement();
-            if (isPhone())
+            if (isPhone() && $("#countyStr").height() == 0)
                 $(".county").click();
         });
     }
@@ -353,15 +353,12 @@ function openNews(e, cityName) {
     else
         document.getElementsByName("county")[0].className += " active"; //點地圖的話會沒東西
 
-
     function newsOpen_phone() {
         if (!isPhone())
             return;
         show["height"] = "250px";
-        footer.style.top = $("html").height() - 350 + "px";
-        $(".ctrlBtn").css("top", _ctrlBtnTop - 250 + "px");
-
-        // $("#map")[0].addEventListener("click", phoneNewsEvent);
+        footer.style.top = $("html").height() - 250 + "px";
+        $(".ctrlBtn").css("top", _ctrlBtnTop - 150 + "px");
     }
 
     function newsClose_phone() {
@@ -369,9 +366,6 @@ function openNews(e, cityName) {
             return;
         footer.style.top = $("html").height() - 100 + "px";
         $(".ctrlBtn").css("top", _ctrlBtnTop + "px");
-    }
-    function phoneNewsEvent(e) {
-        alert(0);
     }
 }
 
