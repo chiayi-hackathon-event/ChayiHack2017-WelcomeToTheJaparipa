@@ -13,6 +13,8 @@ window.onload = function (e) {
 	iconEle.addEventListener("click", iconEleMouseoverEvent, true);
 	setSlider();
 	setPhoneView();
+	setLabtopView();
+
 }
 
 function setSlider() {
@@ -91,12 +93,7 @@ function setPhoneView() {
 	colorBar.setAttribute("height", "50");
 
 	//資訊列大調整
-	var tabEle = document.getElementsByClassName("tabEle")[0];
-	var footer = document.getElementsByClassName("footer")[0];
-	var mobileInfoEle = document.getElementsByClassName("mobileInfoEle")[0];
-	footer.style.top = $("html").height() - 120 + "px";
-	mobileInfoEle.appendChild(tabEle);
-
+	setInfo();
 
 	function setMobileIcon() {
 		$("ul").prepend('<i id="ic" class="material-icons icon noselect rotate_transition" onclick="dropdown(this)" value="-1">add_circle_outline</i>');
@@ -119,6 +116,21 @@ function setPhoneView() {
 	function bodyClickEvent(e) {
 		alert(0);
 	}
+}
+
+function setLabtopView() {
+	if (!isLaptop())
+		return;
+	setInfo();
+}
+
+function setInfo() {
+	var tabEle = document.getElementsByClassName("tabEle")[0];
+	var footer = document.getElementsByClassName("footer")[0];
+	var mobileInfoEle = document.getElementsByClassName("mobileInfoEle")[0];
+	var sliderEle = document.getElementsByClassName("sliderEle")[0];
+	footer.style.top = $("html").height() - 120 + "px";
+	mobileInfoEle.appendChild(tabEle);
 }
 
 function iconEleMouseoverEvent(e) {
@@ -304,3 +316,4 @@ function getWhichNow() {
 	index = parseInt(index) + 1;
 	return $("i")[index];
 }
+

@@ -308,10 +308,21 @@ function normlizion_city_name(city_name) {
 }
 
 function isPhone() {
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
+    if (/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
         return true;
     else
         return false;
+}
+
+function isLaptop() {
+    if (/iPad/i.test(navigator.userAgent))
+        return true;
+    else
+        return false;
+}
+
+function getEleByClass(className) {
+    return document.getElementsByClassName(className)[0];
 }
 
 function openNews(e, cityName) {
@@ -321,10 +332,10 @@ function openNews(e, cityName) {
     var newContent = document.getElementById(cityName); //新的
     var show = { "height": "80%", "opacity": "1" };
     var hide = { "height": "0%", "opacity": "0" };
-    var footer = document.getElementsByClassName("footer")[0];
-    var header = document.getElementsByClassName("header")[0];
-    var colorBarEle = document.getElementsByClassName("colorBarEle")[0];
-    var iconsEle = document.getElementsByClassName("iconsEle")[0];
+    var footer = getEleByClass("footer");
+    var header = getEleByClass("header");
+    var colorBarEle = getEleByClass("colorBarEle");
+    var iconsEle = getEleByClass("iconsEle");
     var ph = $("html").height() - header.offsetHeight - getHeightByClass("sliderEle") - getHeightByClass("tab") + "px";//phoneHeight
 
 
@@ -354,7 +365,7 @@ function openNews(e, cityName) {
     if (e.currentTarget)
         e.currentTarget.className += " active"; //套用選到的效果
     else
-        document.getElementsByName("county")[0].className += " active"; //點地圖的話會沒東西
+        getEleByClass("county").className += " active"; //點地圖的話會沒東西
 
     function newsOpen_phone() {
         if (!isPhone())
@@ -367,12 +378,13 @@ function openNews(e, cityName) {
     }
 
     function newsClose_phone() {
-        if (!isPhone())
-            return;
-        colorBarEle.style.opacity = "1";
-        iconsEle.style.opacity = "1";
-        footer.style.top = $("html").height() - 100 + "px";
-        $(".ctrlBtn").css("top", _ctrlBtnTop + "px");
+        if (isPhone() || isLaptop()) {
+            colorBarEle.style.opacity = "1";
+            iconsEle.style.opacity = "1";
+            footer.style.top = $("html").height() - 120 + "px";
+            $(".ctrlBtn").css("top", _ctrlBtnTop + "px");
+        }
+
     }
 
     function getHeightByClass(cName) {
