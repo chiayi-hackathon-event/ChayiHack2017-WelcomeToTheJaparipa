@@ -13,7 +13,6 @@ body {
     -webkit-tap-highlight-color: transparent;
 }
 .header {
-    height: 10%;
     width: 100%;
     position: fixed;
     z-index: 99999;
@@ -65,11 +64,6 @@ h3,
 p {
     padding: 0 10px 0 10px;
 }
-p {
-    /*color:white;*/
-    /*background: rgba(95, 158, 160, 0.3);*/
-}
-/* Style the close button */
 
 .topright {
     float: right;
@@ -149,14 +143,14 @@ p {
 .leftButton {
     left: 5%;
     border-width: 50px 86.6px 50px 0;
-    border-color: transparent #afb1a0 transparent transparent;
+    border-color: transparent rgba(175, 177, 160, 0.7) transparent transparent;
     cursor: pointer;
 }
 .rightButton {
     right: 30%;
     border-style: solid;
     border-width: 50px 0 50px 86.6px;
-    border-color: transparent transparent transparent #afb1a0;
+    border-color: transparent transparent transparent rgba(175, 177, 160, 0.7);
 }
 .rightButton:active {
     border-color: transparent transparent transparent #C62828;
@@ -226,7 +220,7 @@ p {
     background: rgba(0, 121, 107, 0.65);
     color: white;
     text-shadow: 2px 2px 4px rgba(95, 158, 160, 0.3);
-    box-shadow: 0px 8px 5px rgba(136, 136, 136, 0.4);
+    /* box-shadow: 0px 8px 5px rgba(136, 136, 136, 0.4); */
     text-align: center;
     font-weight: bolder;
     padding: 16px;
@@ -286,18 +280,24 @@ p {
 /*響應式網頁，當網頁寬度小於500(手機、平板)，就做下列東西*/
 
 @media only screen and (max-width: 770px) {
+    .footer{
+        z-index: 999;
+    }
+    .ctrlBtn{
+        top: 75%;
+        z-index: 1000;
+    }
     .leftButton {
         border-width: 30px 45px 30px 0;
-        top: 75%;
     }
     .rightButton {
         border-width: 30px 0 30px 45px;
-        top: 75%;
         right: 5%;
     }
     .iconsEle {
         top: 12%;
         z-index: 999;
+        transition: .3s;
     }
     .icon {
         background-color: #afafaf;
@@ -311,10 +311,12 @@ p {
         position: fixed;
         top: 75px;
         left: 5%;
+        z-index: -1;
+        transition: .3s;
     }
     #data_type {
         font-size: 20px;
-        padding: 15px;
+        padding: 20px;
     }
     #info {
         display: none !important;
@@ -324,7 +326,6 @@ p {
     }
     .mobileInfoEle {
         display: table;
-        height: 65px;
         width: 100%;
     }
     .tabEle {

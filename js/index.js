@@ -107,18 +107,13 @@ function setCountyData() {
 
 function setSvgEle() {
     var mapEle = $(".mapEle")[0];
-    var margin = { top: -5, right: -5, bottom: -5, left: -5 },
+    var margin = { top: 0, right: 0, bottom: 0, left: 10 },
         width = mapEle.offsetWidth - margin.left - margin.right,
         height = mapEle.offsetHeight - margin.top - margin.bottom - 4;
-
-
 
     var zoom = d3.behavior.zoom()
         .scaleExtent([1, 10])
         .on("zoom", zoomed);
-
-    if (isPhone()) //手機要設預設
-        zoom.translate([-650.4530924757012, -351.1409682004763]).scale(3);
 
     var drag = d3.behavior.drag()
         .origin(function (d) {
@@ -134,16 +129,19 @@ function setSvgEle() {
         .call(zoom);
 
     var rect = svg.append("rect")
-        .attr("width", width)
-        .attr("height", height)
+        .attr("width", $("html").width())//width
+        .attr("height", $("html").height()) //height
         .style("fill", "none")
         .style("pointer-events", "all");
 
     var container = svg.append("g")
         .attr("id", "container");
 
-    if (isPhone())//手機要設預設-2
-        container.attr("transform", "translate(-650.4530924757012, -351.1409682004763)scale(3)");
+    if (isPhone()) {//手機要設預設
+        d3.select("svg").attr("viewBox", "0 25 350 900")
+        zoom.translate([-456.65740993861266, 179.2119462621692]).scale(1.65);
+        container.attr("transform", "translate(-456.65740993861266,179.2119462621692)scale(1.65)");
+    }
 
     function zoomed() {
         container.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
@@ -324,6 +322,11 @@ function openNews(e, cityName) {
     var show = { "height": "80%", "opacity": "1" };
     var hide = { "height": "0%", "opacity": "0" };
     var footer = document.getElementsByClassName("footer")[0];
+    var header = document.getElementsByClassName("header")[0];
+    var colorBarEle = document.getElementsByClassName("colorBarEle")[0];
+    var iconsEle = document.getElementsByClassName("iconsEle")[0];
+    var ph = $("html").height() - header.offsetHeight - getHeightByClass("sliderEle") - getHeightByClass("tab") + "px";//phoneHeight
+
 
     newsOpen_phone();
     if (oldContent == newContent) { //選到自己
@@ -356,16 +359,24 @@ function openNews(e, cityName) {
     function newsOpen_phone() {
         if (!isPhone())
             return;
-        show["height"] = "250px";
-        footer.style.top = $("html").height() - 250 + "px";
+        show["height"] = ph;
+        colorBarEle.style.opacity = "0";
+        iconsEle.style.opacity = "0";
+        footer.style.top = (header.offsetTop + header.offsetHeight) + "px";
         $(".ctrlBtn").css("top", _ctrlBtnTop - 150 + "px");
     }
 
     function newsClose_phone() {
         if (!isPhone())
             return;
+        colorBarEle.style.opacity = "1";
+        iconsEle.style.opacity = "1";
         footer.style.top = $("html").height() - 100 + "px";
         $(".ctrlBtn").css("top", _ctrlBtnTop + "px");
+    }
+
+    function getHeightByClass(cName) {
+        return $("." + cName).height();
     }
 }
 

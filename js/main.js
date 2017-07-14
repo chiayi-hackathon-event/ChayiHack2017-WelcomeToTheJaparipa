@@ -97,8 +97,6 @@ function setPhoneView() {
 	footer.style.top = $("html").height() - 100 + "px";
 	mobileInfoEle.appendChild(tabEle);
 
-	//
-
 
 	function setMobileIcon() {
 		$("ul").prepend('<i id="ic" class="material-icons icon noselect rotate_transition" onclick="dropdown(this)" value="-1">add_circle_outline</i>');
@@ -118,7 +116,7 @@ function setPhoneView() {
 		}, 500);
 	}
 
-	function bodyClickEvent(e){
+	function bodyClickEvent(e) {
 		alert(0);
 	}
 }
@@ -248,7 +246,8 @@ function dropdown(e) {
 }
 
 function dropOpen() {
-	$(".bg_mask").css({ "opacity": "0.8", "z-index": "998" })
+	$(".bg_mask").css({ "opacity": "0.8", "z-index": "1000" });
+	$(".iconsEle").css({ "z-index": "1001" });
 	var iconCtrl = $("#ic");
 	var selected = document.getElementsByClassName("hintSelected")[0];
 	iconCtrl[0].innerHTML = "remove_circle_outline";
@@ -271,7 +270,10 @@ function dropOpen() {
 
 function dropClose(pressed) {
 	$(".bg_mask").css({ "opacity": "0" });
-	setTimeout(function () { $(".bg_mask").css({ "z-index": "-999" }) }, 500);
+	setTimeout(function () {
+		$(".bg_mask").css({ "z-index": "-999" });
+		$(".iconsEle").css({ "z-index": "999" });
+	}, 500);
 	var iconCtrl = $("#ic");
 	var selected = document.getElementsByClassName("hintSelected")[0];
 	iconCtrl[0].innerHTML = "add_circle_outline";
