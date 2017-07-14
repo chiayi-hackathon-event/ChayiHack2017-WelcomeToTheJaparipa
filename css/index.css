@@ -304,6 +304,7 @@ p {
     }
     .sliderEle {
         width: 100%;
+        padding: 10px 0;
     }
     .colorBarEle {
         width: 30%;

@@ -94,7 +94,7 @@ function setPhoneView() {
 	var tabEle = document.getElementsByClassName("tabEle")[0];
 	var footer = document.getElementsByClassName("footer")[0];
 	var mobileInfoEle = document.getElementsByClassName("mobileInfoEle")[0];
-	footer.style.top = $("html").height() - 100 + "px";
+	footer.style.top = $("html").height() - 120 + "px";
 	mobileInfoEle.appendChild(tabEle);
 
 
@@ -270,9 +270,9 @@ function dropOpen() {
 
 function dropClose(pressed) {
 	$(".bg_mask").css({ "opacity": "0" });
+	$(".iconsEle").css({ "z-index": "999" });
 	setTimeout(function () {
 		$(".bg_mask").css({ "z-index": "-999" });
-		$(".iconsEle").css({ "z-index": "999" });
 	}, 500);
 	var iconCtrl = $("#ic");
 	var selected = document.getElementsByClassName("hintSelected")[0];
