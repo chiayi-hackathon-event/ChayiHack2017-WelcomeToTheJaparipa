@@ -279,7 +279,7 @@ p {
 }
 /*響應式網頁，當網頁寬度小於500(手機、平板)，就做下列東西*/
 
-@media only screen and (max-width: 770px) {
+@media only screen and (max-width: 600px) {
     .footer{
         z-index: 999;
     }
@@ -318,6 +318,56 @@ p {
     #data_type {
         font-size: 20px;
         padding: 20px;
+    }
+    #info {
+        display: none !important;
+    }
+    .triangle{
+        right:-19px;
+    }
+    .mobileInfoEle {
+        display: table;
+        width: 100%;
+    }
+    .tabEle {
+        width: 100%;
+    }
+    div.tab button {
+        padding: 20px 16px;
+    }
+    .tabcontent p {
+        margin: 15px 20px;
+    }
+}
+
+@media only screen and (max-width: 770px) {
+    .rightButton {
+        right: 5%;
+    }
+    .iconsEle {
+        top: 12%;
+        z-index: 999;
+        transition: .3s;
+    }
+    .icon {
+        background-color: #afafaf;
+    }
+    .sliderEle {
+        width: 100%;
+        padding: 10px 0;
+    }
+    .colorBarEle {
+        width: 30%;
+        float: left;
+        position: fixed;
+        top: 75px;
+        left: 5%;
+        z-index: -1;
+        transition: .3s;
+    }
+    #data_type {
+        font-size: 20px;
+        padding: 17px;
     }
     #info {
         display: none !important;

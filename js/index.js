@@ -141,7 +141,11 @@ function setSvgEle() {
         d3.select("svg").attr("viewBox", "0 25 350 900")
         zoom.translate([-456.65740993861266, 179.2119462621692]).scale(1.65);
         container.attr("transform", "translate(-456.65740993861266,179.2119462621692)scale(1.65)");
+    } else if (isLaptop()) {
+        zoom.translate([-408.5175076949754, -244.02137915086405]).scale(2.3);
+        container.attr("transform", "translate(-408.5175076949754,-244.02137915086405)scale(2.3)");
     }
+
 
     function zoomed() {
         container.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
@@ -244,11 +248,10 @@ function setTaiwan() {
                 $(this).attr('fill', 'White');
             $(this).attr("class", "choice");
 
-
             updateMsg(d);
             setTabElement();
-            if (isPhone() && $("#countyStr").height() == 0)
-                $(".county").click();
+            // if (isPhone() && $("#countyStr").height() == 0)
+            //     $(".county").click();
         });
     }
     update();
@@ -336,8 +339,9 @@ function openNews(e, cityName) {
     var header = getEleByClass("header");
     var colorBarEle = getEleByClass("colorBarEle");
     var iconsEle = getEleByClass("iconsEle");
+    var tab = getEleByClass("tab");
     var ph = $("html").height() - header.offsetHeight - getHeightByClass("sliderEle") - getHeightByClass("tab") + "px";//phoneHeight
-
+    var lh = "350px";//LabtopHeight
 
     newsOpen_phone();
     if (oldContent == newContent) { //選到自己
@@ -368,13 +372,20 @@ function openNews(e, cityName) {
         getEleByClass("county").className += " active"; //點地圖的話會沒東西
 
     function newsOpen_phone() {
-        if (!isPhone())
-            return;
-        show["height"] = ph;
-        colorBarEle.style.opacity = "0";
-        iconsEle.style.opacity = "0";
-        footer.style.top = (header.offsetTop + header.offsetHeight) + "px";
-        $(".ctrlBtn").css("top", _ctrlBtnTop - 150 + "px");
+        if (isPhone() || isLaptop()) {
+            if (isPhone()) {
+                show["height"] = ph;
+                colorBarEle.style.opacity = "0"; //設定透明度0
+                iconsEle.style.opacity = "0"; //設定透明度0
+                footer.style.top = (header.offsetTop + header.offsetHeight) + "px"; //footer往上移動
+                $(".ctrlBtn").css("top", _ctrlBtnTop - 150 + "px"); //ctrlBtn往上移動
+
+            } else { //isLabtop
+                show["height"] = lh;
+                footer.style.top = ($("html").height() - tab.offsetHeight - 350) + "px"; //HTML高度減掉Tab高度跟News高度
+                $(".ctrlBtn").css("top", _ctrlBtnTop - 300 + "px"); //ctrlBtn往上移動
+            }
+        }
     }
 
     function newsClose_phone() {
@@ -485,7 +496,7 @@ function setTabElement() {
 
 //設定Tab的拖拉事件
 function tabsSetting() {
-    if (isPhone())
+    if (isPhone() || isLaptop())
         return;
     document.getElementById("defaultOpen").click();
     var body = document.getElementsByTagName("body")[0];

@@ -121,6 +121,13 @@ function setPhoneView() {
 function setLabtopView() {
 	if (!isLaptop())
 		return;
+
+	//colorBar 寬度調整
+	var text = document.getElementsByTagName("text")[0];
+	text.setAttribute("x", "-10");
+	var tspan = $("tspan", text)[1];
+	tspan.innerHTML = "　　　　　　　";
+
 	setInfo();
 }
 
@@ -140,7 +147,7 @@ function iconEleMouseoverEvent(e) {
 		return;
 	var aEle = document.getElementsByClassName("hintHover")[0];
 	if (t == "mousemove") {
-		if (isPhone()) {
+		if (isPhone() || isLaptop()) {
 			return; //手機不要hover
 		}
 		var a = document.getElementsByClassName("hintText")[0]; //設定文字
