@@ -286,7 +286,7 @@ function updateMsg(d) {
     else if (_statsIndex == 0)
         msg + "人<br/>";
     else if (_statsIndex == 1 || _statsIndex == 2 || _statsIndex == 3)
-        msg += "%<br/>";
+        msg += "‰<br/>";
     else if (_statsIndex == 4 || _statsIndex == 5)
         msg += "元<br/>";
 
