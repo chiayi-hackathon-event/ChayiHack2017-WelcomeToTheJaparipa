@@ -233,8 +233,8 @@ p {
     width: 25%;
     float: left;
 }
-/*響應式網頁，當網頁寬度大於500(網頁)，就做下列東西*/
 
+/* 網頁 */
 @media only screen and (min-width: 770px) {
     .mapEle {
         overflow: hidden;
@@ -277,14 +277,14 @@ p {
         border-color: transparent #C62828 transparent transparent;
     }
 }
-/*響應式網頁，當網頁寬度小於500(手機、平板)，就做下列東西*/
 
-@media only screen and (max-width: 600px) {
+/*手機*/
+@media only screen and (max-width: 520px) {
     .footer{
         z-index: 999;
     }
     .ctrlBtn{
-        top: 75%;
+        top: 72%;
         z-index: 1000;
     }
     .leftButton {
@@ -340,7 +340,11 @@ p {
     }
 }
 
-@media only screen and (max-width: 770px) {
+/*平板*/
+@media only screen and  (max-width: 770px) and (min-width: 520px) {
+    .ctrlBtn{
+        top:77%;
+    }
     .rightButton {
         right: 5%;
     }

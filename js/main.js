@@ -36,7 +36,6 @@ function setSlider() {
 			// grid: true,
 			onFinish: function (data) {
 				sliderEvent(data);
-
 			},
 			onUpdate: function (data) { //左右鍵
 				sliderEvent(data);

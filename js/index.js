@@ -235,7 +235,7 @@ function setTaiwan() {
             },
             "stroke": 'green'
         }).on("mouseover", function (d, evnt) {
-            if (!isPhone())
+            if (!isPhone() && !isLaptop())
                 $(this).attr('fill', 'White');
 
         }).on("mouseleave", function (d) {
@@ -244,7 +244,7 @@ function setTaiwan() {
 
         }).on("click", function (d) {
             $(".choice").removeClass("choice");
-            if (!isPhone())
+            if (!isPhone() && !isLaptop())
                 $(this).attr('fill', 'White');
             $(this).attr("class", "choice");
 
@@ -408,7 +408,7 @@ function setTabElement() {
     if (county)
         document.getElementsByClassName("county")[0].innerHTML = county;
     var dateTime = $("#dateSlider").data("ionRangeSlider").result.from_value;
-    if (isPhone())
+    if (isPhone() || isLaptop())
         $("h3", $(".tabcontent")).html($("#case")[0].innerHTML);
     else
         $("h3", $(".tabcontent")).html("日期：" + dateTime);
